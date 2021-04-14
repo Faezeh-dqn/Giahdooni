@@ -11,8 +11,11 @@ class Moreplant extends StatelessWidget {
             IconButton(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) =>
-                        Three_choises_p(imageAddress: 'images/nakhl.jpg')));
+                    builder: (context) => Three_choises_p(
+                          imageAddress: 'images/nakhl.jpg',
+                          imageName: '''Madagascar
+ palm''',
+                        )));
               },
               icon: Image.asset('images/nakhl.jpg'),
               iconSize: 170,
@@ -32,8 +35,10 @@ class Moreplant extends StatelessWidget {
             IconButton(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) =>
-                        Three_choises_p(imageAddress: 'images/aglo.jpg')));
+                    builder: (context) => Three_choises_p(
+                          imageAddress: 'images/aglo.jpg',
+                          imageName: 'Aglaonema',
+                        )));
               },
               icon: Image.asset('images/aglo.jpg'),
               iconSize: 170,
@@ -52,8 +57,10 @@ class Moreplant extends StatelessWidget {
             IconButton(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) =>
-                        Three_choises_p(imageAddress: 'images/hosn.jpg')));
+                    builder: (context) => Three_choises_p(
+                          imageAddress: 'images/hosn.jpg',
+                          imageName: 'Solenostemon',
+                        )));
               },
               icon: Image.asset('images/hosn.jpg'),
               iconSize: 170,
@@ -72,8 +79,10 @@ class Moreplant extends StatelessWidget {
             IconButton(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) =>
-                        Three_choises_p(imageAddress: 'images/sansoria.jpg')));
+                    builder: (context) => Three_choises_p(
+                          imageAddress: 'images/sansoria.jpg',
+                          imageName: 'Sansevieria',
+                        )));
               },
               icon: Image.asset('images/sansoria.jpg'),
               iconSize: 170,

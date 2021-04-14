@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:giahdooni/Buying_page.dart';
+import 'package:giahdooni/Introduction_page.dart';
 import 'home_page.dart';
 
 class Three_choises_p extends StatelessWidget {
-  Three_choises_p({this.imageAddress});
+  Three_choises_p({@required this.imageAddress, @required this.imageName});
   String imageAddress;
+  String imageName;
   static String class_id = "Three_choises_p";
   @override
   Widget build(BuildContext context) {
@@ -47,7 +49,11 @@ class Three_choises_p extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30)),
                   onPressed: () {
-                    print('okay');
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => Intro_p(
+                              imageNameForIntroduction: imageName,
+                              imageForIntroduction: imageAddress,
+                            )));
                   },
                   color: Color(0xff4A6934),
                   child: Text(
@@ -71,7 +77,8 @@ class Three_choises_p extends StatelessWidget {
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => BuyingP(
-                              imagePath: imageAddress,
+                              imageForBuying: imageAddress,
+                              imageNameForBuying: imageName,
                             )));
                   },
                   color: Color(0xff4A6934),

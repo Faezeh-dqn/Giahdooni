@@ -4,12 +4,12 @@ import 'package:giahdooni/home_page.dart';
 import 'package:giahdooni/three_choises_page.dart';
 
 class BuyingP extends StatefulWidget {
-  BuyingP({this.imagePath});
+  BuyingP({@required this.imageForBuying, @required this.imageNameForBuying});
   static String class_id = "BuyingP";
-
+  String imageForBuying;
+  String imageNameForBuying;
   @override
   _BuyingPState createState() => _BuyingPState();
-  String imagePath;
 }
 
 int _countItem = 0;
@@ -113,91 +113,88 @@ class _BuyingPState extends State<BuyingP> {
         child: Container(
           color: Color(0xffAEFF7A),
           height: 200,
-          child: Hero(
-            tag: 'btn1',
-            child: CupertinoPicker(
-              itemExtent: 50,
-              onSelectedItemChanged: (value) {
+          child: CupertinoPicker(
+            itemExtent: 50,
+            onSelectedItemChanged: (value) {
+              cupertinoColorSelectedItem = value;
+              setState(() {
                 cupertinoColorSelectedItem = value;
-                setState(() {
-                  cupertinoColorSelectedItem = value;
-                  switch (cupertinoColorSelectedItem) {
-                    case 0:
-                      vaseColorFromeSpinner = "Brown";
-                      break;
-                    case 1:
-                      vaseColorFromeSpinner = "White";
-                      break;
-                    case 2:
-                      vaseColorFromeSpinner = "Red";
-                      break;
-                    case 3:
-                      vaseColorFromeSpinner = "Green";
-                      break;
-                    case 4:
-                      vaseColorFromeSpinner = "Yellow";
-                      break;
-                    case 5:
-                      vaseColorFromeSpinner = "Silver";
-                      break;
-                    case 6:
-                      vaseColorFromeSpinner = "Blue";
-                      break;
-                    case 7:
-                      vaseColorFromeSpinner = "Perple";
-                      break;
-                  }
-                });
-              },
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 30),
-                  child: Text('Brown'),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 30),
-                  child: Text('White'),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 30),
-                  child: Text('Red'),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 30),
-                  child: Text('Green'),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 30),
-                  child: Text('Yellow'),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 30),
-                  child: Text('Silver'),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 30),
-                  child: Text('Blue'),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 30),
-                  child: Text('purpel'),
-                ),
-                Column(
-                  children: [
-                    Row(
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                            print('uu');
-                          },
-                          child: Text('Close'),
-                        )
-                      ],
-                    )
-                  ],
-                )
-              ],
-            ),
+                switch (cupertinoColorSelectedItem) {
+                  case 0:
+                    vaseColorFromeSpinner = "Brown";
+                    break;
+                  case 1:
+                    vaseColorFromeSpinner = "White";
+                    break;
+                  case 2:
+                    vaseColorFromeSpinner = "Red";
+                    break;
+                  case 3:
+                    vaseColorFromeSpinner = "Green";
+                    break;
+                  case 4:
+                    vaseColorFromeSpinner = "Yellow";
+                    break;
+                  case 5:
+                    vaseColorFromeSpinner = "Silver";
+                    break;
+                  case 6:
+                    vaseColorFromeSpinner = "Blue";
+                    break;
+                  case 7:
+                    vaseColorFromeSpinner = "Perple";
+                    break;
+                }
+              });
+            },
+            children: [
+              Padding(
+                padding: EdgeInsets.only(left: 30),
+                child: Text('Brown'),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 30),
+                child: Text('White'),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 30),
+                child: Text('Red'),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 30),
+                child: Text('Green'),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 30),
+                child: Text('Yellow'),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 30),
+                child: Text('Silver'),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 30),
+                child: Text('Blue'),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 30),
+                child: Text('purpel'),
+              ),
+              Column(
+                children: [
+                  Row(
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          print('uu');
+                        },
+                        child: Text('Close'),
+                      )
+                    ],
+                  )
+                ],
+              )
+            ],
           ),
         ),
       );
@@ -219,7 +216,11 @@ class _BuyingPState extends State<BuyingP> {
                   iconSize: 32,
                   icon: Icon(Icons.arrow_back),
                   onPressed: () {
-                    Navigator.pushNamed(context, HomeP.class_id);
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => Three_choises_p(
+                              imageAddress: widget.imageForBuying,
+                              imageName: widget.imageNameForBuying,
+                            )));
                   }),
             ),
             SizedBox(
@@ -234,16 +235,16 @@ class _BuyingPState extends State<BuyingP> {
                   decoration:
                       BoxDecoration(border: Border.all(color: Colors.black)),
                   child: Image.asset(
-                    'images/ghashoghi.jpg',
+                    widget.imageForBuying,
                     height: 190,
                     width: 190,
                   ),
                 ),
                 SizedBox(
-                  width: 35,
+                  width: 10,
                 ),
                 Text(
-                  'Zamiifolia',
+                  widget.imageNameForBuying,
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
                 ),
               ],
@@ -254,17 +255,7 @@ class _BuyingPState extends State<BuyingP> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                FloatingActionButton(
-                  elevation: 0,
-                  onPressed: () {
-                    minus();
-                  },
-                  child: Icon(
-                    Icons.remove,
-                    color: Colors.black,
-                  ),
-                  backgroundColor: Color(0xff8ED362),
-                ),
+                CountButton(),
                 SizedBox(
                   width: 10,
                 ),
@@ -350,6 +341,19 @@ class _BuyingPState extends State<BuyingP> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class CountButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 50,
+      height: 50,
+      decoration:
+          BoxDecoration(color: Color(0xff8ED362), shape: BoxShape.circle),
+      child: Center(child: Icon(Icons.remove)),
     );
   }
 }

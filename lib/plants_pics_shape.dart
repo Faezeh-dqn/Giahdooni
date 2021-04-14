@@ -11,8 +11,10 @@ class Plants_pics_shape extends StatelessWidget {
             IconButton(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) =>
-                        Three_choises_p(imageAddress: 'images/zamofilia.jpg')));
+                    builder: (context) => Three_choises_p(
+                          imageAddress: 'images/zamofilia.jpg',
+                          imageName: 'Zamiifolia',
+                        )));
               },
               icon: Image.asset('images/zamofilia.jpg'),
               iconSize: 170,
@@ -31,8 +33,10 @@ class Plants_pics_shape extends StatelessWidget {
             IconButton(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) =>
-                        Three_choises_p(imageAddress: 'images/petuus.jpg')));
+                    builder: (context) => Three_choises_p(
+                          imageAddress: 'images/petuus.jpg',
+                          imageName: 'Pothos',
+                        )));
               },
               icon: Image.asset('images/petuus.jpg'),
               iconSize: 170,
@@ -51,8 +55,11 @@ class Plants_pics_shape extends StatelessWidget {
             IconButton(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) =>
-                        Three_choises_p(imageAddress: 'images/bent.jpg')));
+                    builder: (context) => Three_choises_p(
+                          imageAddress: 'images/bent.jpg',
+                          imageName: '''Euphorbia
+pulcherrima''',
+                        )));
               },
               icon: Image.asset('images/bent.jpg'),
               iconSize: 170,
@@ -72,8 +79,10 @@ pulcherrima''',
             IconButton(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) =>
-                        Three_choises_p(imageAddress: 'images/anjiri.jpg')));
+                    builder: (context) => Three_choises_p(
+                          imageAddress: 'images/anjiri.jpg',
+                          imageName: 'Swiss cheese',
+                        )));
               },
               icon: Image.asset('images/anjiri.jpg'),
               iconSize: 170,
@@ -92,8 +101,10 @@ pulcherrima''',
             IconButton(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) =>
-                        Three_choises_p(imageAddress: 'images/radiator.jpg')));
+                    builder: (context) => Three_choises_p(
+                          imageAddress: 'images/radiator.jpg',
+                          imageName: 'Peperomia',
+                        )));
               },
               icon: Image.asset('images/radiator.jpg'),
               iconSize: 170,
