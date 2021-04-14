@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:giahdooni/three_choises_page.dart';
+import 'package:get/get.dart';
+import 'package:giahdooni/views/three_choises_page.dart';
 
 class Intro_p extends StatelessWidget {
-  Intro_p(
-      {@required this.imageForIntroduction,
-      @required this.imageNameForIntroduction});
-  String imageForIntroduction;
-  String imageNameForIntroduction = 'Zamifolia';
+  final String imageAssetPath;
+  final String name;
+
+  Intro_p({
+    @required this.imageAssetPath,
+    @required this.name,
+  });
   @override
-  static String class_id = "Intro_p";
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
@@ -17,15 +19,17 @@ class Intro_p extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(top: 30, right: 340),
               child: IconButton(
-                  iconSize: 32,
-                  icon: Icon(Icons.arrow_back),
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => Three_choises_p(
-                              imageName: imageNameForIntroduction,
-                              imageAddress: imageForIntroduction,
-                            )));
-                  }),
+                iconSize: 32,
+                icon: Icon(Icons.arrow_back),
+                onPressed: () {
+                  Get.to(
+                    Three_choises_p(
+                      imageName: name,
+                      imageAddress: imageAssetPath,
+                    ),
+                  );
+                },
+              ),
             ),
             Row(
               children: [
@@ -33,13 +37,13 @@ class Intro_p extends StatelessWidget {
                   decoration:
                       BoxDecoration(border: Border.all(color: Colors.black)),
                   child: Image.asset(
-                    '$imageForIntroduction',
+                    '$imageAssetPath',
                     height: 190,
                     width: 190,
                   ),
                 ),
                 Text(
-                  '$imageNameForIntroduction',
+                  '$name',
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
                 ),
               ],

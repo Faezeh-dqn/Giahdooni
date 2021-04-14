@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:giahdooni/home_page.dart';
-import 'package:giahdooni/signIn_page.dart';
+import 'package:giahdooni/views/home_page.dart';
+import 'package:giahdooni/views/signIn_page.dart';
 
 class Sign_up_p extends StatelessWidget {
   @override
-  static String class_id = "Sign_up_p";
+  static String class_id = 'Sign_up_p';
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:giahdooni/Buying_page.dart';
-import 'package:giahdooni/Introduction_page.dart';
+
+import 'Buying_page.dart';
+import 'Introduction_page.dart';
 import 'home_page.dart';
 
 class Three_choises_p extends StatelessWidget {
   Three_choises_p({@required this.imageAddress, @required this.imageName});
   String imageAddress;
   String imageName;
-  static String class_id = "Three_choises_p";
+  static String class_id = 'Three_choises_p';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,9 +23,10 @@ class Three_choises_p extends StatelessWidget {
                 icon: Icon(Icons.arrow_back),
                 onPressed: () {
                   Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (context) => HomeP()),
-                      ModalRoute.withName("/HomeP"));
+                    context,
+                    MaterialPageRoute(builder: (context) => HomeP()),
+                    ModalRoute.withName('/HomeP'),
+                  );
                 },
               ),
             ),
@@ -51,8 +53,8 @@ class Three_choises_p extends StatelessWidget {
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => Intro_p(
-                              imageNameForIntroduction: imageName,
-                              imageForIntroduction: imageAddress,
+                              name: imageName,
+                              imageAssetPath: imageAddress,
                             )));
                   },
                   color: Color(0xff4A6934),

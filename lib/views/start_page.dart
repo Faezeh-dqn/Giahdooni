@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:giahdooni/signup_page.dart';
+import 'package:giahdooni/views/signup_page.dart';
 
 class StartPage extends StatelessWidget {
-  static String class_id = "StartPage";
+  static String class_id = 'StartPage';
   @override
   Widget build(BuildContext context) {
     Timer(Duration(seconds: 3), () {
