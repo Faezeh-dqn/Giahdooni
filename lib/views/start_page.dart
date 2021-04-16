@@ -1,15 +1,13 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'dart:async';
 import 'package:giahdooni/views/signup_page.dart';
 
 class StartPage extends StatelessWidget {
-  static String class_id = 'StartPage';
   @override
   Widget build(BuildContext context) {
     Timer(Duration(seconds: 3), () {
       Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => Sign_up_p()));
+          .push(MaterialPageRoute(builder: (context) => SignUpPage()));
     });
     return Scaffold(
       body: Container(

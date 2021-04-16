@@ -8,7 +8,7 @@ class Three_choises_p extends StatelessWidget {
   Three_choises_p({@required this.imageAddress, @required this.imageName});
   String imageAddress;
   String imageName;
-  static String class_id = 'Three_choises_p';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,13 +21,7 @@ class Three_choises_p extends StatelessWidget {
                 color: Colors.black,
                 iconSize: 33,
                 icon: Icon(Icons.arrow_back),
-                onPressed: () {
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => HomeP()),
-                    ModalRoute.withName('/HomeP'),
-                  );
-                },
+                onPressed: () {},
               ),
             ),
             Padding(
@@ -50,13 +44,7 @@ class Three_choises_p extends StatelessWidget {
                 child: RaisedButton(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30)),
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => Intro_p(
-                              name: imageName,
-                              imageAssetPath: imageAddress,
-                            )));
-                  },
+                  onPressed: () {},
                   color: Color(0xff4A6934),
                   child: Text(
                     'Introduction',
@@ -76,13 +64,7 @@ class Three_choises_p extends StatelessWidget {
                 child: RaisedButton(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30)),
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => BuyingP(
-                              imageForBuying: imageAddress,
-                              imageNameForBuying: imageName,
-                            )));
-                  },
+                  onPressed: () {},
                   color: Color(0xff4A6934),
                   child: Text(
                     'Buy',

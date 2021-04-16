@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "820130960606",
+    "project_id": "giahdooni",
+    "storage_bucket": "giahdooni.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:820130960606:android:fa4a7426ca252dd0e01e4f",
+        "android_client_info": {
+          "package_name": "com.example.giahdooni"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "820130960606-4rb1itarcrtuanrieeia4t2u4s7r642l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAe1t6yoXGHIyZ5OaZ7YdgMdoOIplQU_Cg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "820130960606-4rb1itarcrtuanrieeia4t2u4s7r642l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

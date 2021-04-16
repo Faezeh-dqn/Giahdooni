@@ -4,22 +4,19 @@ import 'package:giahdooni/views/Buying_page.dart';
 import 'package:giahdooni/views/moreplant.dart';
 import 'package:stacked/stacked.dart';
 
-class HomeP extends StatefulWidget {
-  static String class_id = 'HomeP';
+class HomePage extends StatefulWidget {
   @override
-  _HomePState createState() => _HomePState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _HomePState extends State<HomeP> {
+class _HomePageState extends State<HomePage> {
   bool shouldShowMore = false;
   bool showButton = true;
   int selectedItem = 0;
 
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomePageViewModel>.reactive(
-      viewModelBuilder: () {
-        return HomePageViewModel().init();
-      },
+      viewModelBuilder: () => HomePageViewModel()..init(),
       builder: (context, model, child) => Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
