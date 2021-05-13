@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:get/get.dart';
 import 'package:giahdooni/viewmodels/home_page_viewmodel.dart';
 import 'package:giahdooni/views/Buying_page.dart';
-import 'package:giahdooni/views/moreplant.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:giahdooni/views/orders_page.dart';
+import 'package:giahdooni/views/signup_page.dart';
+import 'package:giahdooni/views/choosing_page.dart';
 import 'package:stacked/stacked.dart';
 
 class HomePage extends StatefulWidget {
@@ -10,10 +15,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool shouldShowMore = false;
-  bool showButton = true;
-  int selectedItem = 0;
-
+  int selectedIndex = 0;
+  String nameForSearch;
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomePageViewModel>.reactive(
       viewModelBuilder: () => HomePageViewModel()..init(),
@@ -27,140 +30,150 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 children: [
                   Container(
-                    width: 385,
-                    height: 40,
-                    child: TextField(
-                      textAlignVertical: TextAlignVertical(y: 1),
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.search),
-                        fillColor: Color(0xffE5E5E5),
-                        filled: true,
-                        hintText: 'Search your plant here',
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                      ),
+                    height: 41,
+                    width: 390,
+                    child: TypeAheadField(
+                      textFieldConfiguration: TextFieldConfiguration(
+                          autofocus: true,
+                          style: DefaultTextStyle.of(context)
+                              .style
+                              .copyWith(fontStyle: FontStyle.italic),
+                          decoration:
+                              InputDecoration(border: OutlineInputBorder())),
+                      suggestionsCallback: (pattern) async {
+                        return model.getPlantFormDB(pattern);
+                      },
+                      itemBuilder: (context, suggestion) {
+                        return ListTile(
+                          leading: Icon(Icons.shopping_cart),
+                          title: Text(suggestion['name']),
+                          subtitle: Text('\$${suggestion['price']}'),
+                        );
+                      },
+                      onSuggestionSelected: (suggestion) {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => OrdersPage(),
+                        ));
+                      },
                     ),
-                  ),
+                  )
                 ],
               ),
             )
           ],
         ),
         body: Center(
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(
-              children: [
-                SizedBox(height: 20),
-                Padding(
-                  padding: EdgeInsets.only(right: 207),
-                  child: Text(
-                    'Suggestions:',
-                    style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
-                  ),
-                ),
-                SizedBox(height: 40),
-                !showButton
-                    ? SizedBox(
-                        height: 1,
-                      )
-                    : RaisedButton(
-                        elevation: 0,
-                        onPressed: () {
-                          shouldShowMore = !shouldShowMore;
-                          setState(() {
-                            showButton = !showButton;
-                          });
-                        },
-                        child: Text(
-                          'More',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w800),
-                        ),
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30)),
-                      ),
-                (shouldShowMore)
-                    ? moreItem(context)
-                    : Container(
-                        height: 2,
-                      ),
-              ],
-            ),
-          ),
-        ),
-        bottomNavigationBar: SizedBox(
-          height: 55,
-          child: BottomNavigationBar(
-            onTap: (value) {
-              setState(() {
-                selectedItem = value;
-                print('$selectedItem');
-              });
-              switch (selectedItem) {
-                case 0:
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => BuyingP(
-                        imageForBuying: 'images/aglo.jpg',
-                        imageNameForBuying: 'aglo',
-                      ),
-                    ),
-                  );
-                  ;
-                  break;
-                case 1:
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => Moreplant()));
-                  break;
-              }
-            },
-            backgroundColor: Color(0xff466731),
-            selectedItemColor: Color(0xff8ED362),
-            currentIndex: 1,
-            items: [
-              BottomNavigationBarItem(
-                label: '',
-                icon: Icon(
-                  Icons.person,
-                  color: Colors.white,
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(right: 330),
+                child: IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => SignUpPage()));
+                  },
                 ),
               ),
-              BottomNavigationBarItem(
-                label: '',
-                icon: Icon(Icons.home, color: Colors.white),
+              Padding(
+                padding: EdgeInsets.only(right: 207),
+                child: Text(
+                  'Suggestionss:',
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black),
+                ),
               ),
-              BottomNavigationBarItem(
-                label: '',
-                icon: Icon(Icons.shopping_basket, color: Colors.white),
-              ),
+              Expanded(
+                child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: 1,
+                  itemBuilder: (context, itemCount) {
+                    return Column(
+                      children: [
+                        PlantsList(
+                            plantName: model.plant0.name,
+                            plantPath: model.plant0.imagePath,
+                            plantPrice: model.plant0.price),
+                        PlantsList(
+                            plantName: model.plant1.name,
+                            plantPath: model.plant1.imagePath,
+                            plantPrice: model.plant1.price),
+                        PlantsList(
+                            plantName: model.plant2.name,
+                            plantPath: model.plant2.imagePath,
+                            plantPrice: model.plant2.price),
+                        PlantsList(
+                            plantName: model.plant3.name,
+                            plantPath: model.plant3.imagePath,
+                            plantPrice: model.plant3.price),
+                        PlantsList(
+                            plantName: model.plant4.name,
+                            plantPath: model.plant4.imagePath,
+                            plantPrice: model.plant4.price),
+                        PlantsList(
+                            plantName: model.plant5.name,
+                            plantPath: model.plant5.imagePath,
+                            plantPrice: model.plant5.price),
+                        PlantsList(
+                            plantName: model.plant6.name,
+                            plantPath: model.plant6.imagePath,
+                            plantPrice: model.plant6.price),
+                        PlantsList(
+                            plantName: model.plant7.name,
+                            plantPath: model.plant7.imagePath,
+                            plantPrice: model.plant7.price),
+                        PlantsList(
+                            plantName: model.plant8.name,
+                            plantPath: model.plant8.imagePath,
+                            plantPrice: model.plant8.price),
+                      ],
+                    );
+                  },
+                ),
+              )
             ],
           ),
         ),
       ),
     );
   }
+}
 
-  Widget moreItem(BuildContext context) {
-    final ScrollController _scrollController = ScrollController();
+class PlantsList extends StatelessWidget {
+  @override
+  PlantsList({
+    @required this.plantName,
+    @required this.plantPath,
+    @required this.plantPrice,
+  });
+  String plantName;
+  String plantPath;
+  int plantPrice;
 
-    return Container(
-      child: Column(
-        children: [
-          ListView(
-            controller: _scrollController,
-            scrollDirection: Axis.vertical,
-            shrinkWrap: true,
-            children: [Moreplant()],
-          ),
-        ],
-      ),
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        IconButton(
+          onPressed: () {
+            Get.to(() => ChoosingPage(
+                  imagePath: plantPath,
+                  imageName: plantName,
+                  plantPrice: plantPrice,
+                ));
+          },
+          iconSize: 170,
+          icon: Image.asset('$plantPath'),
+        ),
+        SizedBox(
+          width: 10,
+        ),
+        Text(
+          '$plantName',
+          style: TextStyle(fontSize: 23, fontWeight: FontWeight.w500),
+        )
+      ],
     );
   }
 }

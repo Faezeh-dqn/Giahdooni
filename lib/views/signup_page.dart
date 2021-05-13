@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:giahdooni/service_locator.dart';
 import 'package:giahdooni/viewmodels/sign_up_viewmodel.dart';
-import 'package:giahdooni/views/home_page.dart';
 import 'package:giahdooni/views/signIn_page.dart';
 import 'package:stacked/stacked.dart';
 

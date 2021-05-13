@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
 import 'package:giahdooni/services/authentication_service.dart';
 import 'package:giahdooni/services/firestore_service.dart';
@@ -31,4 +32,5 @@ setUpGetIt() {
     () =>
         SignInViewModel(authenticationService: getIt<AuthenticationService>()),
   );
+  getIt.registerSingleton<PageController>(PageController(initialPage: 1));
 }

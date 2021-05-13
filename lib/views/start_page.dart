@@ -5,7 +5,7 @@ import 'package:giahdooni/views/signup_page.dart';
 class StartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Timer(Duration(seconds: 3), () {
+    Timer(Duration(seconds: 4), () {
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => SignUpPage()));
     });

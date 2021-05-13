@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
+import 'package:giahdooni/views/menu_page.dart';
 import 'Buying_page.dart';
 import 'Introduction_page.dart';
 import 'home_page.dart';
 
-class Three_choises_p extends StatelessWidget {
-  Three_choises_p({@required this.imageAddress, @required this.imageName});
-  String imageAddress;
+class ChoosingPage extends StatelessWidget {
+  ChoosingPage(
+      {@required this.imagePath,
+      @required this.imageName,
+      @required this.plantPrice});
+  String imagePath;
   String imageName;
+  int plantPrice;
 
   @override
   Widget build(BuildContext context) {
@@ -16,36 +21,36 @@ class Three_choises_p extends StatelessWidget {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.only(top: 35, right: 320),
+              padding: EdgeInsets.only(top: 20, right: 320),
               child: IconButton(
                 color: Colors.black,
                 iconSize: 33,
                 icon: Icon(Icons.arrow_back),
-                onPressed: () {},
+                onPressed: () {
+                  Get.to(() => MenuPage());
+                },
+              ),
+            ),
+            Container(
+              child: Image.asset(
+                '$imagePath',
+                height: 330,
+                width: 330,
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 20),
-              child: Container(
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey.shade700)),
-                child: Image.asset(
-                  '$imageAddress',
-                  height: 250,
-                  width: 250,
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 70),
+              padding: EdgeInsets.only(top: 50),
               child: Container(
                 height: 70,
                 width: 250,
                 child: RaisedButton(
+                  elevation: 0,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30)),
-                  onPressed: () {},
-                  color: Color(0xff4A6934),
+                  onPressed: () {
+                    Get.to(Intro_p(imageAssetPath: imagePath, name: imageName));
+                  },
+                  color: Color(0xff8ED362),
                   child: Text(
                     'Introduction',
                     style: TextStyle(
@@ -62,10 +67,17 @@ class Three_choises_p extends StatelessWidget {
                 height: 70,
                 width: 250,
                 child: RaisedButton(
+                  elevation: 0,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30)),
-                  onPressed: () {},
-                  color: Color(0xff4A6934),
+                  onPressed: () {
+                    Get.to(() => BuyingPage(
+                          imagePath: imagePath,
+                          imageName: imageName,
+                          plantPrice: plantPrice,
+                        ));
+                  },
+                  color: Color(0xff8ED362),
                   child: Text(
                     'Buy',
                     style: TextStyle(
@@ -82,12 +94,13 @@ class Three_choises_p extends StatelessWidget {
                 height: 70,
                 width: 250,
                 child: RaisedButton(
+                  elevation: 0,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30)),
                   onPressed: () {
                     print('okay');
                   },
-                  color: Color(0xff4A6934),
+                  color: Color(0xff8ED362),
                   child: Text(
                     'Diseases',
                     style: TextStyle(
