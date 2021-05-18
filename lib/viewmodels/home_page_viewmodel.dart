@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:giahdooni/models/plant.dart';
 import 'package:giahdooni/services/firestore_service.dart';
 import 'package:stacked/stacked.dart';
@@ -5,6 +6,7 @@ import 'package:stacked/stacked.dart';
 class HomePageViewModel extends BaseViewModel {
   List<Plant> plants = [];
   FirestoreService firestoreService;
+  HomePageViewModel({@required this.firestoreService});
   Plant plantToShow;
 
   getPlantFormDB(String name) async {

@@ -23,7 +23,7 @@ class FirestoreService {
     Plant plant;
     QuerySnapshot querySnapshot = await fireStore
         .collection(plantCollection)
-        .where("name", isEqualTo: name)
+        .where('name', isEqualTo: name)
         .get();
     querySnapshot.docs.forEach((snapshot) {
       plant = Plant.fromMap(snapshot.data());

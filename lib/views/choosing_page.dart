@@ -7,10 +7,10 @@ import 'home_page.dart';
 
 class ChoosingPage extends StatelessWidget {
   ChoosingPage({
-    @required this.imagePath,
-    @required this.imageName,
-    @required this.plantPrice,
-    @required this.about,
+    this.imagePath,
+    this.imageName,
+    this.plantPrice,
+    this.about,
   });
   String imagePath;
   String imageName;

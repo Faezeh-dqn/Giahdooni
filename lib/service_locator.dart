@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
 import 'package:giahdooni/services/authentication_service.dart';
 import 'package:giahdooni/services/firestore_service.dart';
+import 'package:giahdooni/viewmodels/home_page_viewmodel.dart';
 import 'package:giahdooni/viewmodels/sign_in_viewmodel.dart';
 import 'package:giahdooni/viewmodels/sign_up_viewmodel.dart';
 
@@ -24,6 +25,12 @@ setUpGetIt() {
   getIt.registerFactory<SignUpViewModel>(
     () => SignUpViewModel(
       authenticationService: getIt<AuthenticationService>(),
+      firestoreService: getIt<FirestoreService>(),
+    ),
+  );
+
+  getIt.registerSingleton<HomePageViewModel>(
+    HomePageViewModel(
       firestoreService: getIt<FirestoreService>(),
     ),
   );

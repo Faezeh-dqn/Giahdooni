@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:giahdooni/service_locator.dart';
 import 'package:giahdooni/viewmodels/home_page_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 import 'package:giahdooni/models/plant.dart';
@@ -13,7 +14,7 @@ class _SearchBarPageState extends State<SearchBarPage> {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomePageViewModel>.reactive(
-      viewModelBuilder: () => HomePageViewModel(),
+      viewModelBuilder: () => getIt<HomePageViewModel>(),
       builder: (context, model, _) => Scaffold(
         body: Center(
           child: Column(
@@ -30,7 +31,7 @@ class _SearchBarPageState extends State<SearchBarPage> {
                   hintStyle: TextStyle(fontSize: 18, wordSpacing: 0.9),
                 ),
                 onChanged: (value) {
-                  model.getPlantFormDB("Bonsai");
+                  model.getPlantFormDB('Bonsai');
                   print('hhh');
                 },
               ),

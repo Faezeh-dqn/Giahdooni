@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
+import 'package:giahdooni/service_locator.dart';
 import 'package:giahdooni/viewmodels/home_page_viewmodel.dart';
 import 'package:giahdooni/views/Buying_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -20,7 +21,7 @@ class _HomePageState extends State<HomePage> {
   String nameForSearch;
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomePageViewModel>.reactive(
-      viewModelBuilder: () => HomePageViewModel()..init(),
+      viewModelBuilder: () => getIt<HomePageViewModel>(),
       builder: (context, model, child) => Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,

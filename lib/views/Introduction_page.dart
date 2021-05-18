@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:giahdooni/service_locator.dart';
 import 'package:giahdooni/viewmodels/home_page_viewmodel.dart';
 import 'package:giahdooni/views/choosing_page.dart';
 import 'package:stacked/stacked.dart';
@@ -17,7 +18,7 @@ class Intro_p extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomePageViewModel>.reactive(
-      viewModelBuilder: () => HomePageViewModel(),
+      viewModelBuilder: () => getIt<HomePageViewModel>(),
       builder: (context, model, _) => Scaffold(
         body: Center(
           child: SingleChildScrollView(

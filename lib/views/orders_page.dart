@@ -5,14 +5,14 @@ import 'package:stacked/stacked.dart';
 
 class OrdersPage extends StatefulWidget {
   OrdersPage(
-      {@required this.name,
-      @required this.itemsNum,
-      @required this.plantPrice,
-      @required this.vaseColor,
-      @required this.vasePrice,
-      @required this.vaseShape,
-      @required this.path,
-      @required this.total});
+      {this.name,
+      this.itemsNum,
+      this.plantPrice,
+      this.vaseColor,
+      this.vasePrice,
+      this.vaseShape,
+      this.path,
+      this.total});
   String name;
   int plantPrice;
   String vaseShape;
