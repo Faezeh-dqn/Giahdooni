@@ -6,13 +6,16 @@ import 'Introduction_page.dart';
 import 'home_page.dart';
 
 class ChoosingPage extends StatelessWidget {
-  ChoosingPage(
-      {@required this.imagePath,
-      @required this.imageName,
-      @required this.plantPrice});
+  ChoosingPage({
+    @required this.imagePath,
+    @required this.imageName,
+    @required this.plantPrice,
+    @required this.about,
+  });
   String imagePath;
   String imageName;
   int plantPrice;
+  String about;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +51,13 @@ class ChoosingPage extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30)),
                   onPressed: () {
-                    Get.to(Intro_p(imageAssetPath: imagePath, name: imageName));
+                    Get.to(
+                      Intro_p(
+                        imageAssetPath: imagePath,
+                        name: imageName,
+                        about: about,
+                      ),
+                    );
                   },
                   color: Color(0xff8ED362),
                   child: Text(

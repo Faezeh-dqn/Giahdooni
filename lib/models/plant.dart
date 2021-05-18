@@ -7,11 +7,13 @@ class Plant {
   final String name;
   final int price;
   final int itemCount;
+  String about;
   Plant({
     @required this.imagePath,
     @required this.name,
     @required this.price,
     @required this.itemCount,
+    @required this.about,
   });
 
   Plant copyWith({

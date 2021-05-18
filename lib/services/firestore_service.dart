@@ -7,7 +7,7 @@ class FirestoreService {
   final FirebaseFirestore fireStore;
   final AuthenticationService authenticationService;
   String userCollection = 'users';
-  String plantCollection = 'plants';
+  String plantCollection = 'palnts';
 
   FirestoreService({this.fireStore, this.authenticationService});
 
@@ -20,13 +20,14 @@ class FirestoreService {
   }
 
   Future<Plant> getPlantFromDB(String name) async {
-    Plant chosenPlant;
-    QuerySnapshot querySnapshot =
-        await fireStore.collection(plantCollection).where(name).get();
-    querySnapshot.docs.forEach((snapShot) {
-      Plant plant = Plant.fromMap(snapShot.data());
-      chosenPlant = plant;
-      return chosenPlant;
+    Plant plant;
+    QuerySnapshot querySnapshot = await fireStore
+        .collection(plantCollection)
+        .where("name", isEqualTo: name)
+        .get();
+    querySnapshot.docs.forEach((snapshot) {
+      plant = Plant.fromMap(snapshot.data());
     });
+    return plant;
   }
 }
