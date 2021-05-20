@@ -21,6 +21,7 @@ class FirestoreService {
 
   Future<Plant> getPlantFromDB(String name) async {
     Plant plant;
+
     QuerySnapshot querySnapshot = await fireStore
         .collection(plantCollection)
         .where('name', isEqualTo: name)
@@ -28,6 +29,7 @@ class FirestoreService {
     querySnapshot.docs.forEach((snapshot) {
       plant = Plant.fromMap(snapshot.data());
     });
+
     return plant;
   }
 }

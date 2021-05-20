@@ -3,6 +3,8 @@ import 'package:giahdooni/views/home_page.dart';
 import 'package:giahdooni/views/orders_page.dart';
 import 'package:giahdooni/views/profile_page.dart';
 
+import '../service_locator.dart';
+
 class MenuPage extends StatefulWidget {
   @override
   _MenuPageState createState() => _MenuPageState();

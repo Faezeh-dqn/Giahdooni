@@ -6,11 +6,11 @@ import 'package:giahdooni/models/plant.dart';
 
 class SearchBarPage extends StatefulWidget {
   @override
-  String val;
   _SearchBarPageState createState() => _SearchBarPageState();
 }
 
 class _SearchBarPageState extends State<SearchBarPage> {
+  Plant plant;
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomePageViewModel>.reactive(
@@ -23,18 +23,18 @@ class _SearchBarPageState extends State<SearchBarPage> {
                 height: 30,
               ),
               TextField(
-                autofocus: true,
-                showCursor: true,
-                decoration: InputDecoration(
-                  border: UnderlineInputBorder(),
-                  hintText: '  Search...',
-                  hintStyle: TextStyle(fontSize: 18, wordSpacing: 0.9),
-                ),
-                onChanged: (value) {
-                  model.getPlantFormDB('Bonsai');
-                  print('hhh');
-                },
-              ),
+                  autofocus: true,
+                  showCursor: true,
+                  decoration: InputDecoration(
+                    border: UnderlineInputBorder(),
+                    hintText: '  Search...',
+                    hintStyle: TextStyle(fontSize: 18, wordSpacing: 0.9),
+                  ),
+                  onSubmitted: (value) async {
+                    print('Search Term is : $value');
+                    plant = await model.getPlantFormDB(value);
+                    print('Plant from firebase is : $plant');
+                  }),
             ],
           ),
         ),

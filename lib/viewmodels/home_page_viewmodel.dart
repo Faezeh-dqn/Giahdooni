@@ -14,6 +14,7 @@ class HomePageViewModel extends BaseViewModel {
     plantToShow = await firestoreService.getPlantFromDB(name);
     setBusy(false);
     notifyListeners();
+    return plantToShow;
   }
 
   Plant plant0 = Plant(
