@@ -1,88 +1,63 @@
 import 'package:flutter/material.dart';
 import 'package:giahdooni/service_locator.dart';
-import 'package:giahdooni/viewmodels/home_page_viewmodel.dart';
-import 'package:giahdooni/views/choosing_page.dart';
+import 'package:giahdooni/viewmodels/search_bar_view_model.dart';
+import 'package:giahdooni/views/home_page.dart';
 import 'package:stacked/stacked.dart';
-import 'package:giahdooni/models/plant.dart';
-import 'package:get/get.dart';
 
-class SearchBarPage extends StatefulWidget {
-  @override
-  _SearchBarPageState createState() => _SearchBarPageState();
-  Plant plant;
-  SearchBarPage({@required this.plant});
-}
-
-class _SearchBarPageState extends State<SearchBarPage> {
-  Plant searchedPlant;
-  bool isLoading = false;
-  isLoadingOrNot() {
-    var widgetToShow;
-    if (searchedPlant == null) {
-      print('we enter here');
-      widgetToShow = Padding(
-        padding: EdgeInsets.only(top: 60),
-        child: CircularProgressIndicator(),
-      );
-    }
-    return widgetToShow;
-  }
-
+class SearchBarPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<HomePageViewModel>.reactive(
-      viewModelBuilder: () => getIt<HomePageViewModel>(),
+    return ViewModelBuilder<SearchBarPageViewModel>.reactive(
+      viewModelBuilder: () => getIt<SearchBarPageViewModel>(),
       disposeViewModel: false,
-      builder: (context, model, _) => Scaffold(
-        body: Center(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 30,
-              ),
-              TextField(
-                  autofocus: true,
-                  showCursor: true,
-                  decoration: InputDecoration(
-                    border: UnderlineInputBorder(),
-                    hintText: '  Search...',
-                    hintStyle: TextStyle(fontSize: 18, wordSpacing: 0.9),
+      builder: (context, model, _) {
+        if (model.isBusy) {
+          return Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        } else {
+          return Scaffold(
+            body: Center(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 30,
                   ),
-                  onSubmitted: (value) async {
-                    isLoading = !isLoading;
-                    searchedPlant = await model.getPlantFormDB(value);
-                    print(isLoading);
-                  }),
-              (isLoading == false) ? isLoadingOrNot() : showSearchedPlant()
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Row showSearchedPlant() {
-    return Row(
-      children: [
-        IconButton(
-          onPressed: () {
-            Get.to(
-              ChoosingPage(
-                plant: searchedPlant,
+                  TextField(
+                    autofocus: true,
+                    showCursor: true,
+                    decoration: InputDecoration(
+                      border: UnderlineInputBorder(),
+                      hintText: '  Search...',
+                      hintStyle: TextStyle(fontSize: 18, wordSpacing: 0.9),
+                    ),
+                    onSubmitted: (value) async {
+                      model.getPlantFormDB(value);
+                    },
+                  ),
+                  model.plantToShow != null
+                      ? PlantCard(plant: model.plantToShow)
+                      : model.hasCalledApi
+                          ? Center(
+                              child: Text(
+                                'Couldnt find any plants',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            )
+                          : Center(
+                              child: Text(
+                                'Search for plants ... ',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            )
+                ],
               ),
-            );
-          },
-          icon: Image.asset(searchedPlant.imagePath),
-          iconSize: 190,
-        ),
-        SizedBox(
-          width: 15,
-        ),
-        Text(
-          searchedPlant.name,
-          style: TextStyle(fontSize: 23, fontWeight: FontWeight.w500),
-        ),
-      ],
+            ),
+          );
+        }
+      },
     );
   }
 }

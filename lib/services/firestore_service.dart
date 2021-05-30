@@ -25,18 +25,13 @@ class FirestoreService {
 
   Future<Plant> getPlantFromDB(String name) async {
     Plant plant;
-
     QuerySnapshot querySnapshot = await fireStore
         .collection(plantCollection)
         .where('name', isEqualTo: name)
         .get();
     querySnapshot.docs.forEach((snapshot) {
       plant = Plant.fromMap(snapshot.data());
-      if (plant == null) {
-        throw Exception('plant not found');
-      }
     });
-
     return plant;
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:giahdooni/service_locator.dart';
 import 'package:giahdooni/viewmodels/orders_Page_viewmodel.dart';
 import 'package:giahdooni/views/menu_page.dart';
 import 'package:stacked/stacked.dart';
@@ -29,7 +30,7 @@ class _OrdersPageState extends State<OrdersPage> {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<OrdersPageViewModel>.reactive(
-      viewModelBuilder: () => OrdersPageViewModel(),
+      viewModelBuilder: () => getIt<OrdersPageViewModel>(),
       builder: (context, model, _) => Scaffold(
         body: Center(
           child: Column(

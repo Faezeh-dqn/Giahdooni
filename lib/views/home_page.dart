@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
+import 'package:stacked/stacked.dart';
+
 import 'package:giahdooni/models/plant.dart';
 import 'package:giahdooni/service_locator.dart';
 import 'package:giahdooni/viewmodels/home_page_viewmodel.dart';
+import 'package:giahdooni/views/choosing_page.dart';
 import 'package:giahdooni/views/searchBar_page.dart';
 import 'package:giahdooni/views/signup_page.dart';
-import 'package:giahdooni/views/choosing_page.dart';
-import 'package:stacked/stacked.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -59,16 +59,6 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.only(right: 330),
-                child: IconButton(
-                  icon: Icon(Icons.arrow_back),
-                  onPressed: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => SignUpPage()));
-                  },
-                ),
-              ),
-              Padding(
                 padding: EdgeInsets.only(right: 207),
                 child: Text(
                   'Suggestions:',
@@ -83,30 +73,7 @@ class _HomePageState extends State<HomePage> {
                   scrollDirection: Axis.vertical,
                   itemCount: model.plantsToSuggest.length,
                   itemBuilder: (context, index) {
-                    return Row(
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            Get.to(
-                              () => ChoosingPage(
-                                plant: model.plantsToSuggest[index],
-                              ),
-                            );
-                          },
-                          iconSize: 170,
-                          icon: Image.asset(
-                              '${model.plantsToSuggest[index].imagePath}'),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          '${model.plantsToSuggest[index].name}',
-                          style: TextStyle(
-                              fontSize: 23, fontWeight: FontWeight.w500),
-                        ),
-                      ],
-                    );
+                    return PlantCard(plant: model.plantsToSuggest[index]);
                   },
                 ),
               )
@@ -114,6 +81,39 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class PlantCard extends StatelessWidget {
+  final Plant plant;
+
+  const PlantCard({
+    @required this.plant,
+  });
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        IconButton(
+          onPressed: () {
+            Get.to(
+              () => ChoosingPage(
+                plant: plant,
+              ),
+            );
+          },
+          iconSize: 170,
+          icon: Image.asset('${plant.imagePath}'),
+        ),
+        SizedBox(
+          width: 10,
+        ),
+        Text(
+          '${plant.name}',
+          style: TextStyle(fontSize: 23, fontWeight: FontWeight.w500),
+        ),
+      ],
     );
   }
 }

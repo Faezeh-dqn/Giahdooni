@@ -106,7 +106,7 @@ class ChoosingPage extends StatelessWidget {
                       );
                       print('plant id is : ${plant.id}');
 
-                      Get.to(() => DiseasesPage(
+                      await Get.to(() => DiseasesPage(
                             plant: plant,
                           ));
                     },

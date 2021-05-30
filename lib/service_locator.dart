@@ -8,9 +8,11 @@ import 'package:giahdooni/viewmodels/buying_page_viewmodel.dart';
 import 'package:giahdooni/viewmodels/diseases_page_viewmodel.dart';
 import 'package:giahdooni/viewmodels/home_page_viewmodel.dart';
 import 'package:giahdooni/viewmodels/orders_Page_viewmodel.dart';
+import 'package:giahdooni/viewmodels/search_bar_view_model.dart';
 
 import 'package:giahdooni/viewmodels/sign_in_viewmodel.dart';
 import 'package:giahdooni/viewmodels/sign_up_viewmodel.dart';
+import 'package:giahdooni/views/searchBar_page.dart';
 
 GetIt getIt = GetIt.instance;
 
@@ -52,6 +54,12 @@ setUpGetIt() {
 
   getIt.registerSingleton<DiseasesPageViewModel>(
     DiseasesPageViewModel(
+      firestoreService: getIt<FirestoreService>(),
+    ),
+  );
+
+  getIt.registerFactory<SearchBarPageViewModel>(
+    () => SearchBarPageViewModel(
       firestoreService: getIt<FirestoreService>(),
     ),
   );
