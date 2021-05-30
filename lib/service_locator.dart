@@ -4,7 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
 import 'package:giahdooni/services/authentication_service.dart';
 import 'package:giahdooni/services/firestore_service.dart';
+import 'package:giahdooni/viewmodels/buying_page_viewmodel.dart';
+import 'package:giahdooni/viewmodels/diseases_page_viewmodel.dart';
 import 'package:giahdooni/viewmodels/home_page_viewmodel.dart';
+import 'package:giahdooni/viewmodels/orders_Page_viewmodel.dart';
+
 import 'package:giahdooni/viewmodels/sign_in_viewmodel.dart';
 import 'package:giahdooni/viewmodels/sign_up_viewmodel.dart';
 
@@ -31,6 +35,23 @@ setUpGetIt() {
 
   getIt.registerSingleton<HomePageViewModel>(
     HomePageViewModel(
+      firestoreService: getIt<FirestoreService>(),
+    ),
+  );
+  getIt.registerSingleton<BuyingPageViewModel>(
+    BuyingPageViewModel(
+      firestoreService: getIt<FirestoreService>(),
+    ),
+  );
+
+  getIt.registerSingleton<OrdersPageViewModel>(
+    OrdersPageViewModel(
+      firestoreService: getIt<FirestoreService>(),
+    ),
+  );
+
+  getIt.registerSingleton<DiseasesPageViewModel>(
+    DiseasesPageViewModel(
       firestoreService: getIt<FirestoreService>(),
     ),
   );

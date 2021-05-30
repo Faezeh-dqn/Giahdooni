@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:giahdooni/views/home_page.dart';
 import 'package:giahdooni/views/orders_page.dart';
 import 'package:giahdooni/views/profile_page.dart';
+import 'package:giahdooni/views/searchBar_page.dart';
 
 import '../service_locator.dart';
 
@@ -13,7 +14,11 @@ class MenuPage extends StatefulWidget {
 class _MenuPageState extends State<MenuPage> {
   int selectedPage = 1;
   int currentIndex = 0;
-  final _pageOptions = [ProfilePage(), HomePage(), OrdersPage()];
+  final _pageOptions = [
+    ProfilePage(),
+    HomePage(),
+    OrdersPage(),
+  ];
 
   @override
   Widget build(BuildContext context) {

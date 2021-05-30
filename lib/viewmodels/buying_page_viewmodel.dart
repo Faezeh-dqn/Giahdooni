@@ -1,14 +1,24 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:giahdooni/models/vase.dart';
+import 'package:giahdooni/services/firestore_service.dart';
 import 'package:stacked/stacked.dart';
+import 'package:giahdooni/models/orders.dart';
 
 class BuyingPageViewModel extends BaseViewModel {
+  FirestoreService firestoreService;
+  BuyingPageViewModel({@required this.firestoreService});
+  Future addOrderedPlantToDB(Order order) async {
+    await firestoreService.addOrderedPlantToDB(order);
+  }
+
   List<String> vaseColor = [
     'White',
     'Black',
     'Brown',
     'Yellow',
     'Orange',
-    'Blue',
+    'Bule',
     'Green',
     'Red',
     'Grey'
@@ -21,6 +31,8 @@ class BuyingPageViewModel extends BaseViewModel {
   String _selectedColor = 'Choose color:';
   String _selectedShape = 'Choose shape:';
   int _itemCount = 0;
+  int _vasePriceForShow;
+  int _totalPrice;
 
   setselectedColor(String selectedColor) {
     _selectedColor = selectedColor;
@@ -28,6 +40,20 @@ class BuyingPageViewModel extends BaseViewModel {
   }
 
   String get selectedColor => _selectedColor;
+
+  setTotalPrice(int totalPrice) {
+    _totalPrice = totalPrice;
+    notifyListeners();
+  }
+
+  int get totalPrice => _totalPrice;
+
+  setVasePrice(int vasePriceForShow) {
+    _vasePriceForShow = vasePriceForShow;
+    notifyListeners();
+  }
+
+  int get vasePriceForShow => _vasePriceForShow;
 
   setItemCount(int itemCount) {
     _itemCount = itemCount;

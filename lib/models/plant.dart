@@ -1,32 +1,34 @@
-import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
-
 class Plant {
   final String imagePath;
   final String name;
-  final int price;
+  final int plantPrice;
   final int itemCount;
   String about;
+  String id;
   Plant({
     this.imagePath,
     this.name,
-    this.price,
+    this.plantPrice,
     this.itemCount,
     this.about,
+    this.id,
   });
 
   Plant copyWith({
     String imagePath,
     String name,
-    int price,
+    int plantPrice,
     int itemCount,
+    String about,
+    List id,
   }) {
     return Plant(
       imagePath: imagePath ?? this.imagePath,
       name: name ?? this.name,
-      price: price ?? this.price,
+      plantPrice: plantPrice ?? this.plantPrice,
       itemCount: itemCount ?? this.itemCount,
+      about: about ?? this.about,
+      id: id ?? this.id,
     );
   }
 
@@ -34,23 +36,26 @@ class Plant {
     return {
       'imagePath': imagePath,
       'name': name,
-      'price': price,
+      'plantPrice': plantPrice,
       'itemCount': itemCount,
+      'about': about,
+      'id': id,
     };
   }
 
   factory Plant.fromMap(Map<String, dynamic> map) {
     return Plant(
-      imagePath: map['imagePath'],
-      name: map['name'],
-      price: map['price'],
-      itemCount: map['itemCount'],
-    );
+        imagePath: map['imagePath'],
+        name: map['name'],
+        plantPrice: map['plantPrice'],
+        itemCount: map['itemCount'],
+        about: map['about'],
+        id: map['id']);
   }
 
   @override
   String toString() {
-    return 'Plant(imagePath: $imagePath, name: $name, price: $price, itemCount: $itemCount)';
+    return 'Plant(imagePath: $imagePath, name: $name, plantPrice: $plantPrice, itemCount: $itemCount , about:$about , id:$id)';
   }
 
   @override
@@ -60,15 +65,19 @@ class Plant {
     return other is Plant &&
         other.imagePath == imagePath &&
         other.name == name &&
-        other.price == price &&
-        other.itemCount == itemCount;
+        other.plantPrice == plantPrice &&
+        other.itemCount == itemCount &&
+        other.about == about &&
+        other.id == id;
   }
 
   @override
   int get hashCode {
     return imagePath.hashCode ^
         name.hashCode ^
-        price.hashCode ^
-        itemCount.hashCode;
+        plantPrice.hashCode ^
+        itemCount.hashCode ^
+        about.hashCode ^
+        id.hashCode;
   }
 }

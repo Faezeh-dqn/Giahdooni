@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:giahdooni/service_locator.dart';
-
 import 'package:flutter/services.dart';
 import 'package:giahdooni/views/menu_page.dart';
 
