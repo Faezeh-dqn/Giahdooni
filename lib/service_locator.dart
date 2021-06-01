@@ -4,6 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
 import 'package:giahdooni/services/authentication_service.dart';
+import 'package:giahdooni/services/firebase_storage_service.dart';
 import 'package:giahdooni/services/firestore_service.dart';
 import 'package:giahdooni/viewmodels/buying_page_viewmodel.dart';
 import 'package:giahdooni/viewmodels/diseases_page_viewmodel.dart';
@@ -28,7 +29,9 @@ setUpGetIt() {
     ),
   );
 
-  getIt.registerSingleton<FirebaseStorage>(FirebaseStorage.instance);
+  getIt.registerSingleton<FirebaseStorageService>(
+    FirebaseStorageService(firebaseStorage: FirebaseStorage.instance),
+  );
 
   getIt.registerFactory<SignUpViewModel>(
     () => SignUpViewModel(

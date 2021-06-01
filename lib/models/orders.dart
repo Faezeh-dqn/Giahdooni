@@ -1,27 +1,25 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 
 class Order {
+  final int plantPrice;
+  final int vaseprice;
+  final String color;
+  final String vaseShape;
+  final String name;
+  final String plantImage;
+  int itemCount;
+  int totalprice;
+
   Order({
     @required this.plantPrice,
     @required this.vaseprice,
     @required this.color,
     @required this.vaseShape,
     @required this.name,
-    @required this.itemNum,
+    @required this.itemCount,
     @required this.totalprice,
     @required this.plantImage,
   });
-
-  final int plantPrice;
-  final int vaseprice;
-  final String color;
-  final String vaseShape;
-  final String name;
-  final int itemNum;
-  final int totalprice;
-  final String plantImage;
 
   Order copyWith({
     int plantPrice,
@@ -29,9 +27,9 @@ class Order {
     String color,
     String vaseShape,
     String name,
-    int itemNum,
-    int totalprice,
     String plantImage,
+    int itemCount,
+    int totalprice,
   }) {
     return Order(
       plantPrice: plantPrice ?? this.plantPrice,
@@ -39,9 +37,9 @@ class Order {
       color: color ?? this.color,
       vaseShape: vaseShape ?? this.vaseShape,
       name: name ?? this.name,
-      itemNum: itemNum ?? this.itemNum,
-      totalprice: totalprice ?? this.totalprice,
       plantImage: plantImage ?? this.plantImage,
+      itemCount: itemCount ?? this.itemCount,
+      totalprice: totalprice ?? this.totalprice,
     );
   }
 
@@ -52,9 +50,9 @@ class Order {
       'color': color,
       'vaseShape': vaseShape,
       'name': name,
-      'itemNum': itemNum,
-      'totalprice': totalprice,
       'plantImage': plantImage,
+      'itemCount': itemCount,
+      'totalprice': totalprice,
     };
   }
 
@@ -65,19 +63,15 @@ class Order {
       color: map['color'],
       vaseShape: map['vaseShape'],
       name: map['name'],
-      itemNum: map['itemNum'],
-      totalprice: map['totalprice'],
       plantImage: map['plantImage'],
+      itemCount: map['itemCount'],
+      totalprice: map['totalprice'],
     );
   }
 
-  String toJson() => json.encode(toMap());
-
-  factory Order.fromJson(String source) => Order.fromMap(json.decode(source));
-
   @override
   String toString() {
-    return 'Order(plantPrice: $plantPrice, vaseprice: $vaseprice, color: $color, vaseShape: $vaseShape, name: $name, itemNum: $itemNum, totalprice: $totalprice, plantImage: $plantImage)';
+    return 'Order(plantPrice: $plantPrice, vaseprice: $vaseprice, color: $color, vaseShape: $vaseShape, name: $name, plantImage: $plantImage, itemCount: $itemCount, totalprice: $totalprice)';
   }
 
   @override
@@ -90,9 +84,9 @@ class Order {
         other.color == color &&
         other.vaseShape == vaseShape &&
         other.name == name &&
-        other.itemNum == itemNum &&
-        other.totalprice == totalprice &&
-        other.plantImage == plantImage;
+        other.plantImage == plantImage &&
+        other.itemCount == itemCount &&
+        other.totalprice == totalprice;
   }
 
   @override
@@ -102,8 +96,8 @@ class Order {
         color.hashCode ^
         vaseShape.hashCode ^
         name.hashCode ^
-        itemNum.hashCode ^
-        totalprice.hashCode ^
-        plantImage.hashCode;
+        plantImage.hashCode ^
+        itemCount.hashCode ^
+        totalprice.hashCode;
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:giahdooni/service_locator.dart';
 import 'package:flutter/services.dart';
+import 'package:giahdooni/views/home_page.dart';
 import 'package:giahdooni/views/menu_page.dart';
 import 'package:giahdooni/views/profile_page.dart';
 import 'package:giahdooni/views/signup_page.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ProfilePage(),
+      home: SignUpPage(),
     );
   }
 }

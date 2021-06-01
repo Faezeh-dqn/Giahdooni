@@ -298,7 +298,7 @@ class BuyingPage extends StatelessWidget {
                         vaseShape: model.selectedShape,
                         name: plant.name,
                         plantImage: plant.imagePath,
-                        itemNum: model.itemCount,
+                        itemCount: model.itemCount,
                         totalprice: model.totalPrice,
                         vaseprice: model.vasePriceForShow);
                     print(orderdPlant);

@@ -89,7 +89,7 @@ class _OrdersPageState extends State<OrdersPage> {
                                         fontWeight: FontWeight.w400),
                                   ),
                                   Text(
-                                    'Numbers : ${model.orders[index].itemNum}',
+                                    'Numbers : ${model.orders[index].itemCount}',
                                     style: TextStyle(
                                         fontSize: 17,
                                         fontWeight: FontWeight.w400),
@@ -115,8 +115,8 @@ class _OrdersPageState extends State<OrdersPage> {
                                   shape: BoxShape.circle),
                               child: IconButton(
                                 onPressed: () {
-                                  model
-                                      .setCounting(model.orders[index].itemNum);
+                                  model.setCounting(
+                                      model.orders[index].itemCount);
                                   print(model.counting);
                                 },
                                 icon: Icon(
@@ -145,7 +145,7 @@ class _OrdersPageState extends State<OrdersPage> {
                               child: IconButton(
                                 onPressed: () {
                                   model.setCounting(
-                                      (model.orders[index].itemNum) + 1);
+                                      (model.orders[index].itemCount) + 1);
                                   print(model.counting);
                                 },
                                 icon: Icon(

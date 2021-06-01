@@ -81,7 +81,7 @@ class ProfilePage extends StatelessWidget {
                       onPressed: () {},
                       color: Color(0xff8ED362),
                       child: Text(
-                        'Cancle',
+                        'Cancel',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 30,
@@ -142,6 +142,7 @@ class InfoTextField extends StatelessWidget {
           child: Container(
             width: 255,
             child: TextField(
+              controller: TextEditingController(text: 'Ahmad'),
               onChanged: (value) {},
               decoration: InputDecoration(
                 enabledBorder: UnderlineInputBorder(

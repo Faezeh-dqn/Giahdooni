@@ -50,7 +50,7 @@ class FirestoreService {
     if (documentSnapshot.exists) {
       Order retriveDocument = Order.fromMap(documentSnapshot.data());
       Order updatedDocument = order.copyWith(
-          itemNum: retriveDocument.itemNum + order.itemNum,
+          itemCount: retriveDocument.itemCount + order.itemCount,
           totalprice: (retriveDocument.plantPrice + order.plantPrice) +
               (retriveDocument.vaseprice + order.vaseprice));
 
