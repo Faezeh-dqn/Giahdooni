@@ -1,27 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:giahdooni/service_locator.dart';
+import 'package:get/get.dart';
+import 'package:giahdooni/models/orders.dart';
 import 'package:giahdooni/viewmodels/orders_Page_viewmodel.dart';
+import 'package:giahdooni/views/home_page.dart';
 import 'package:giahdooni/views/menu_page.dart';
 import 'package:stacked/stacked.dart';
 
+import '../service_locator.dart';
+
 class OrdersPage extends StatefulWidget {
-  OrdersPage(
-      {this.name,
-      this.itemsNum,
-      this.plantPrice,
-      this.vaseColor,
-      this.vasePrice,
-      this.vaseShape,
-      this.path,
-      this.total});
-  String name;
-  int plantPrice;
-  String vaseShape;
-  String vaseColor;
-  int itemsNum;
-  int vasePrice;
-  String path;
-  int total;
   @override
   _OrdersPageState createState() => _OrdersPageState();
 }
@@ -31,42 +18,170 @@ class _OrdersPageState extends State<OrdersPage> {
   Widget build(BuildContext context) {
     return ViewModelBuilder<OrdersPageViewModel>.reactive(
       viewModelBuilder: () => getIt<OrdersPageViewModel>(),
+      disposeViewModel: false,
+      onModelReady: (model) => model.getOrderdPlantFromDB(),
       builder: (context, model, _) => Scaffold(
         body: Center(
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.only(right: 350, top: 20),
+                padding: EdgeInsets.only(top: 20, right: 340),
                 child: IconButton(
-                  iconSize: 32,
+                  iconSize: 30,
                   icon: Icon(Icons.arrow_back),
                   onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => MenuPage()),
+                    Get.to(
+                      MenuPage(),
                     );
                   },
                 ),
               ),
-              Image.asset(
-                widget.path,
-                height: 150,
-                width: 150,
+              Expanded(
+                child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: model.orders.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: 20,
+                            ),
+                            CircleAvatar(
+                              backgroundImage: AssetImage(
+                                  '${model.orders[index].plantImage}'),
+                              radius: 70,
+                            ),
+                            Container(
+                              height: 160,
+                              width: 230,
+                              child: Column(
+                                children: [
+                                  Text(
+                                    '${model.orders[index].name}',
+                                    style: TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  Text(
+                                    'Vase shape : ${model.orders[index].vaseShape}',
+                                    style: TextStyle(
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  Text(
+                                    'Vase color : ${model.orders[index].color}',
+                                    style: TextStyle(
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  Text(
+                                    'Vase price : ${model.orders[index].vaseprice} T',
+                                    style: TextStyle(
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  Text(
+                                    'Plant price : ${model.orders[index].plantPrice} T',
+                                    style: TextStyle(
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  Text(
+                                    'Numbers : ${model.orders[index].itemNum}',
+                                    style: TextStyle(
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  Text(
+                                    'Total price : ${model.orders[index].totalprice} T',
+                                    style: TextStyle(
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                              width: 50,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                  color: Color(0xff8ED362),
+                                  shape: BoxShape.circle),
+                              child: IconButton(
+                                onPressed: () {
+                                  model
+                                      .setCounting(model.orders[index].itemNum);
+                                  print(model.counting);
+                                },
+                                icon: Icon(
+                                  Icons.remove,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              model.counting.toString(),
+                              style: TextStyle(
+                                  fontSize: 27, fontWeight: FontWeight.w700),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                              width: 50,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                  color: Color(0xff8ED362),
+                                  shape: BoxShape.circle),
+                              child: IconButton(
+                                onPressed: () {
+                                  model.setCounting(
+                                      (model.orders[index].itemNum) + 1);
+                                  print(model.counting);
+                                },
+                                icon: Icon(
+                                  Icons.add,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    );
+                  },
+                ),
               ),
-              SizedBox(
-                width: 20,
+              Padding(
+                padding: EdgeInsets.only(bottom: 30),
+                child: Container(
+                  height: 50,
+                  width: 200,
+                  child: RaisedButton(
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30)),
+                    onPressed: () {},
+                    color: Color(0xff8ED362),
+                    child: Text(
+                      'Continue',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 30,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ),
+                ),
               ),
-              Text(
-                widget.name,
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-              ),
-              Text('count :' + widget.itemsNum.toString(),
-                  style: TextStyle(fontSize: 23, fontWeight: FontWeight.w500)),
-              Text('color :' + widget.vaseColor,
-                  style: TextStyle(fontSize: 23, fontWeight: FontWeight.w500)),
-              Text('shape :' + widget.vaseShape,
-                  style: TextStyle(fontSize: 23, fontWeight: FontWeight.w500)),
-              Text('total price :' + widget.total.toString(),
-                  style: TextStyle(fontSize: 23, fontWeight: FontWeight.w500)),
             ],
           ),
         ),

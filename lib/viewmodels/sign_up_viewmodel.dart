@@ -5,6 +5,7 @@ import 'package:giahdooni/models/user.dart';
 import 'package:giahdooni/services/authentication_service.dart';
 import 'package:giahdooni/services/firestore_service.dart';
 import 'package:giahdooni/views/home_page.dart';
+import 'package:giahdooni/views/menu_page.dart';
 import 'package:stacked/stacked.dart';
 
 class SignUpViewModel extends BaseViewModel {
@@ -44,7 +45,7 @@ class SignUpViewModel extends BaseViewModel {
         email: _email,
       );
       await firestoreService.createUser(user);
-      await Get.off(HomePage());
+      await Get.off(MenuPage());
     } on AuthException catch (e) {
       Get.snackbar('Couldnt Sing up', e.message, backgroundColor: Colors.white);
     }

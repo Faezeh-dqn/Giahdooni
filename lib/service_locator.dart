@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
 import 'package:giahdooni/services/authentication_service.dart';
@@ -8,11 +9,10 @@ import 'package:giahdooni/viewmodels/buying_page_viewmodel.dart';
 import 'package:giahdooni/viewmodels/diseases_page_viewmodel.dart';
 import 'package:giahdooni/viewmodels/home_page_viewmodel.dart';
 import 'package:giahdooni/viewmodels/orders_Page_viewmodel.dart';
+import 'package:giahdooni/viewmodels/profile_page_viewmodel.dart';
 import 'package:giahdooni/viewmodels/search_bar_view_model.dart';
-
 import 'package:giahdooni/viewmodels/sign_in_viewmodel.dart';
 import 'package:giahdooni/viewmodels/sign_up_viewmodel.dart';
-import 'package:giahdooni/views/searchBar_page.dart';
 
 GetIt getIt = GetIt.instance;
 
@@ -28,9 +28,16 @@ setUpGetIt() {
     ),
   );
 
+  getIt.registerSingleton<FirebaseStorage>(FirebaseStorage.instance);
+
   getIt.registerFactory<SignUpViewModel>(
     () => SignUpViewModel(
       authenticationService: getIt<AuthenticationService>(),
+      firestoreService: getIt<FirestoreService>(),
+    ),
+  );
+  getIt.registerFactory<BuyingPageViewModel>(
+    () => BuyingPageViewModel(
       firestoreService: getIt<FirestoreService>(),
     ),
   );
@@ -40,8 +47,9 @@ setUpGetIt() {
       firestoreService: getIt<FirestoreService>(),
     ),
   );
-  getIt.registerSingleton<BuyingPageViewModel>(
-    BuyingPageViewModel(
+
+  getIt.registerSingleton<ProfilePageViewModel>(
+    ProfilePageViewModel(
       firestoreService: getIt<FirestoreService>(),
     ),
   );

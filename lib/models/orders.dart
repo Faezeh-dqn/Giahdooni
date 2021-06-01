@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 
 class Order {
@@ -18,7 +19,7 @@ class Order {
   final String color;
   final String vaseShape;
   final String name;
-  final String itemNum;
+  final int itemNum;
   final int totalprice;
   final String plantImage;
 
@@ -28,7 +29,7 @@ class Order {
     String color,
     String vaseShape,
     String name,
-    String itemNum,
+    int itemNum,
     int totalprice,
     String plantImage,
   }) {
@@ -70,9 +71,13 @@ class Order {
     );
   }
 
+  String toJson() => json.encode(toMap());
+
+  factory Order.fromJson(String source) => Order.fromMap(json.decode(source));
+
   @override
   String toString() {
-    return 'Order(plantPrice: $plantPrice, vaseprice: $vaseprice, color: $color, vaseShape: $vaseShape, name: $name, itemNum: $itemNum, totalprice: $totalprice , plantImage: $plantImage,)';
+    return 'Order(plantPrice: $plantPrice, vaseprice: $vaseprice, color: $color, vaseShape: $vaseShape, name: $name, itemNum: $itemNum, totalprice: $totalprice, plantImage: $plantImage)';
   }
 
   @override

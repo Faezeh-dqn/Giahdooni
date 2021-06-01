@@ -23,10 +23,24 @@ class BuyingPageViewModel extends BaseViewModel {
     'Red',
     'Grey'
   ];
-  Vase vase1 = Vase(price: 30000, shape: 'Cylindrical');
-  Vase vase2 = Vase(price: 25000, shape: 'Spheral');
-  Vase vase3 = Vase(price: 40000, shape: 'Cubical');
-  Vase vase4 = Vase(price: 35000, shape: 'Conical');
+
+  List<Color> circledColor = [
+    Colors.white,
+    Colors.black,
+    Colors.brown,
+    Colors.yellow,
+    Colors.orangeAccent,
+    Colors.blue,
+    Colors.green,
+    Colors.red,
+    Colors.grey
+  ];
+  List<Vase> vases = [
+    Vase(price: 30000, shape: 'Cylindrical'),
+    Vase(price: 25000, shape: 'Spheral'),
+    Vase(price: 40000, shape: 'Cubical'),
+    Vase(price: 35000, shape: 'Conical'),
+  ];
 
   String _selectedColor = 'Choose color:';
   String _selectedShape = 'Choose shape:';

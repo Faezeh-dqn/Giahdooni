@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:giahdooni/service_locator.dart';
 import 'package:giahdooni/viewmodels/search_bar_view_model.dart';
 import 'package:giahdooni/views/home_page.dart';
@@ -40,18 +41,34 @@ class SearchBarPage extends StatelessWidget {
                   model.plantToShow != null
                       ? PlantCard(plant: model.plantToShow)
                       : model.hasCalledApi
-                          ? Center(
-                              child: Text(
-                                'Couldnt find any plants',
-                                style: TextStyle(fontSize: 18),
+                          ? Padding(
+                              padding: EdgeInsets.only(top: 120),
+                              child: Center(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20)),
+                                    border: Border.all(color: Colors.redAccent),
+                                  ),
+                                  height: 70,
+                                  width: 360,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                      top: 10,
+                                      left: 10,
+                                    ),
+                                    child: Text(
+                                      'There is no such plant,or maybe you enter the wrong name!',
+                                      style: TextStyle(
+                                          color: Colors.redAccent,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ),
                               ),
                             )
-                          : Center(
-                              child: Text(
-                                'Search for plants ... ',
-                                style: TextStyle(fontSize: 18),
-                              ),
-                            )
+                          : Center(child: Container()),
                 ],
               ),
             ),

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
 import 'package:giahdooni/models/orders.dart';
 import 'package:giahdooni/models/plant.dart';
 import 'package:giahdooni/views/choosing_page.dart';
 import 'package:giahdooni/viewmodels/buying_page_viewmodel.dart';
-import 'package:giahdooni/views/orders_page.dart';
 import 'package:stacked/stacked.dart';
 import '../service_locator.dart';
 
@@ -132,50 +130,20 @@ class BuyingPage extends StatelessWidget {
                             ),
                             Expanded(
                               child: ListView.builder(
-                                itemCount: 1,
-                                itemBuilder: (context, itemCount) {
+                                itemCount: model.vases.length,
+                                itemBuilder: (context, index) {
                                   return Column(
                                     children: [
                                       BottomSheetShapes(
-                                          shapeName: model.vase1.shape,
-                                          onPressed: () {
-                                            model.setselectedShape(
-                                                model.vase1.shape);
-                                            //setState(() {
-                                            showVPrice = false;
-                                            showTotalPrice = false;
-                                            // });
-                                          }),
-                                      BottomSheetShapes(
-                                          shapeName: model.vase2.shape,
-                                          onPressed: () {
-                                            model.setselectedShape(
-                                                model.vase2.shape);
-                                            //setState(() {
-                                            showVPrice = false;
-                                            showTotalPrice = false;
-                                            // });
-                                          }),
-                                      BottomSheetShapes(
-                                          shapeName: model.vase3.shape,
-                                          onPressed: () {
-                                            model.setselectedShape(
-                                                model.vase3.shape);
-                                            //setState(() {
-                                            showVPrice = false;
-                                            showTotalPrice = false;
-                                            // });
-                                          }),
-                                      BottomSheetShapes(
-                                          shapeName: model.vase4.shape,
-                                          onPressed: () {
-                                            model.setselectedShape(
-                                                model.vase4.shape);
-                                            // setState(() {
-                                            showVPrice = false;
-                                            showTotalPrice = false;
-                                            // });
-                                          }),
+                                        shapeName: model.vases[index].shape,
+                                        onPressed: () {
+                                          model.setselectedShape(
+                                              model.vases[index].shape);
+
+                                          showVPrice = false;
+                                          showTotalPrice = false;
+                                        },
+                                      ),
                                     ],
                                   );
                                 },
@@ -241,84 +209,17 @@ class BuyingPage extends StatelessWidget {
                             ),
                             Expanded(
                               child: ListView.builder(
-                                itemCount: 1,
-                                itemBuilder: (context, itemCount) {
+                                itemCount: model.vaseColor.length,
+                                itemBuilder: (context, index) {
                                   return Column(
                                     children: [
                                       BottomSheetColors(
-                                        colorName: model.vaseColor[0],
+                                        colorName: model.vaseColor[index],
                                         onPressed: () {
-                                          coloredCircle = Colors.white;
+                                          coloredCircle =
+                                              model.circledColor[index];
                                           model.setselectedColor(
-                                              model.vaseColor[0]);
-                                        },
-                                      ),
-                                      BottomSheetColors(
-                                        colorName: model.vaseColor[1],
-                                        onPressed: () {
-                                          coloredCircle = Colors.black;
-                                          model.setselectedColor(
-                                              model.vaseColor[1]);
-
-                                          print(model.selectedColor);
-                                        },
-                                      ),
-                                      BottomSheetColors(
-                                        colorName: model.vaseColor[2],
-                                        onPressed: () {
-                                          coloredCircle = Colors.brown;
-                                          model.setselectedColor(
-                                              model.vaseColor[2]);
-
-                                          print(model.selectedColor);
-                                        },
-                                      ),
-                                      BottomSheetColors(
-                                        colorName: model.vaseColor[3],
-                                        onPressed: () {
-                                          coloredCircle = Colors.yellow;
-                                          model.setselectedColor(
-                                              model.vaseColor[3]);
-                                        },
-                                      ),
-                                      BottomSheetColors(
-                                        colorName: model.vaseColor[4],
-                                        onPressed: () {
-                                          coloredCircle = Colors.orange;
-                                          model.setselectedColor(
-                                              model.vaseColor[4]);
-                                        },
-                                      ),
-                                      BottomSheetColors(
-                                        colorName: model.vaseColor[5],
-                                        onPressed: () {
-                                          coloredCircle = Colors.blue;
-                                          model.setselectedColor(
-                                              model.vaseColor[5]);
-                                        },
-                                      ),
-                                      BottomSheetColors(
-                                        colorName: model.vaseColor[6],
-                                        onPressed: () {
-                                          coloredCircle = Colors.green;
-                                          model.setselectedColor(
-                                              model.vaseColor[6]);
-                                        },
-                                      ),
-                                      BottomSheetColors(
-                                        colorName: model.vaseColor[7],
-                                        onPressed: () {
-                                          coloredCircle = Colors.red;
-                                          model.setselectedColor(
-                                              model.vaseColor[7]);
-                                        },
-                                      ),
-                                      BottomSheetColors(
-                                        colorName: model.vaseColor[8],
-                                        onPressed: () {
-                                          coloredCircle = Colors.grey;
-                                          model.setselectedColor(
-                                              model.vaseColor[8]);
+                                              model.vaseColor[index]);
                                         },
                                       ),
                                     ],
@@ -397,7 +298,7 @@ class BuyingPage extends StatelessWidget {
                         vaseShape: model.selectedShape,
                         name: plant.name,
                         plantImage: plant.imagePath,
-                        itemNum: model.itemCount.toString(),
+                        itemNum: model.itemCount,
                         totalprice: model.totalPrice,
                         vaseprice: model.vasePriceForShow);
                     print(orderdPlant);
@@ -415,13 +316,13 @@ class BuyingPage extends StatelessWidget {
 
   Widget showVasePrice(BuyingPageViewModel model) {
     if (model.selectedShape == 'Cylindrical') {
-      model.setVasePrice(model.vase1.price);
+      model.setVasePrice(model.vases[0].price);
     } else if (model.selectedShape == 'Spheral') {
-      model.setVasePrice(model.vase2.price);
+      model.setVasePrice(model.vases[1].price);
     } else if (model.selectedShape == 'Cubical') {
-      model.setVasePrice(model.vase3.price);
+      model.setVasePrice(model.vases[2].price);
     } else if (model.selectedShape == 'Conical') {
-      model.setVasePrice(model.vase4.price);
+      model.setVasePrice(model.vases[3].price);
     }
     return Text(
       'vase price : ' + model.vasePriceForShow.toString() + 'T',
@@ -435,16 +336,16 @@ class BuyingPage extends StatelessWidget {
   Widget showTotalPricee(BuyingPageViewModel model) {
     if (model.selectedShape == 'Cylindrical') {
       model.setTotalPrice(
-          (model.vase1.price + plant.plantPrice) * model.itemCount);
+          (model.vases[0].price + plant.plantPrice) * model.itemCount);
     } else if (model.selectedShape == 'Spheral') {
       model.setTotalPrice(
-          (model.vase2.price + plant.plantPrice) * model.itemCount);
+          (model.vases[1].price + plant.plantPrice) * model.itemCount);
     } else if (model.selectedShape == 'Cubical') {
       model.setTotalPrice(
-          (model.vase3.price + plant.plantPrice) * model.itemCount);
+          (model.vases[2].price + plant.plantPrice) * model.itemCount);
     } else if (model.selectedShape == 'Conical') {
       model.setTotalPrice(
-          (model.vase4.price + plant.plantPrice) * model.itemCount);
+          (model.vases[3].price + plant.plantPrice) * model.itemCount);
     }
     return Text(
       'total price : ' + model.totalPrice.toString() + 'T',
@@ -514,7 +415,7 @@ class CountButton extends ViewModelWidget<BuyingPageViewModel> {
   CountButton({@required this.onPressed1, @required this.onPressed2});
   final VoidCallback onPressed1;
   final VoidCallback onPressed2;
-  static int countItem = 0;
+
   @override
   Widget build(BuildContext context, BuyingPageViewModel model) {
     return Row(
@@ -542,16 +443,18 @@ class CountButton extends ViewModelWidget<BuyingPageViewModel> {
           width: 10,
         ),
         Container(
-            width: 50,
-            height: 50,
-            decoration:
-                BoxDecoration(color: Color(0xff8ED362), shape: BoxShape.circle),
-            child: IconButton(
-                onPressed: onPressed2,
-                icon: Icon(
-                  Icons.add,
-                  color: Colors.white,
-                )))
+          width: 50,
+          height: 50,
+          decoration:
+              BoxDecoration(color: Color(0xff8ED362), shape: BoxShape.circle),
+          child: IconButton(
+            onPressed: onPressed2,
+            icon: Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
+          ),
+        ),
       ],
     );
   }

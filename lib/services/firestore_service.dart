@@ -4,11 +4,13 @@ import 'package:giahdooni/models/user.dart';
 import 'package:giahdooni/models/plant.dart';
 import 'authentication_service.dart';
 import 'package:giahdooni/models/orders.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class FirestoreService {
   final FirebaseFirestore fireStore;
   final AuthenticationService authenticationService;
-  String userCollection = 'users';
+
+  final String userCollection = 'users';
   String plantCollection = 'palnts';
   String orderCollection = 'order';
   String diseasesCollection = 'diseases';

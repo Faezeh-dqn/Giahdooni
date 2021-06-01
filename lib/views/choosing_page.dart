@@ -9,7 +9,6 @@ import 'package:stacked/stacked.dart';
 import '../service_locator.dart';
 import 'Buying_page.dart';
 import 'Introduction_page.dart';
-import 'home_page.dart';
 
 class ChoosingPage extends StatelessWidget {
   final Plant plant;

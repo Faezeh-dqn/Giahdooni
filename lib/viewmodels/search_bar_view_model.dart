@@ -9,6 +9,7 @@ class SearchBarPageViewModel extends BaseViewModel {
   SearchBarPageViewModel({@required this.firestoreService});
 
   bool hasCalledApi = false;
+  bool x = true;
   Plant plantToShow;
 
   getPlantFormDB(String name) async {

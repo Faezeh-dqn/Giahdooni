@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
           elevation: 0,
           actions: [
             Padding(
-              padding: EdgeInsets.only(top: 4),
+              padding: EdgeInsets.only(top: 5),
               child: Container(
                 width: 392,
                 height: 50,
@@ -58,6 +58,9 @@ class _HomePageState extends State<HomePage> {
         body: Center(
           child: Column(
             children: [
+              SizedBox(
+                height: 20,
+              ),
               Padding(
                 padding: EdgeInsets.only(right: 207),
                 child: Text(

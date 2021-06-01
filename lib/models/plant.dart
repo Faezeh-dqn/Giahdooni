@@ -2,14 +2,13 @@ class Plant {
   final String imagePath;
   final String name;
   final int plantPrice;
-  final int itemCount;
+
   String about;
   String id;
   Plant({
     this.imagePath,
     this.name,
     this.plantPrice,
-    this.itemCount,
     this.about,
     this.id,
   });
@@ -26,7 +25,6 @@ class Plant {
       imagePath: imagePath ?? this.imagePath,
       name: name ?? this.name,
       plantPrice: plantPrice ?? this.plantPrice,
-      itemCount: itemCount ?? this.itemCount,
       about: about ?? this.about,
       id: id ?? this.id,
     );
@@ -37,7 +35,6 @@ class Plant {
       'imagePath': imagePath,
       'name': name,
       'plantPrice': plantPrice,
-      'itemCount': itemCount,
       'about': about,
       'id': id,
     };
@@ -48,14 +45,13 @@ class Plant {
         imagePath: map['imagePath'],
         name: map['name'],
         plantPrice: map['plantPrice'],
-        itemCount: map['itemCount'],
         about: map['about'],
         id: map['id']);
   }
 
   @override
   String toString() {
-    return 'Plant(imagePath: $imagePath, name: $name, plantPrice: $plantPrice, itemCount: $itemCount , about:$about , id:$id)';
+    return 'Plant(imagePath: $imagePath, name: $name, plantPrice: $plantPrice, about:$about , id:$id)';
   }
 
   @override
@@ -66,7 +62,6 @@ class Plant {
         other.imagePath == imagePath &&
         other.name == name &&
         other.plantPrice == plantPrice &&
-        other.itemCount == itemCount &&
         other.about == about &&
         other.id == id;
   }
@@ -76,7 +71,6 @@ class Plant {
     return imagePath.hashCode ^
         name.hashCode ^
         plantPrice.hashCode ^
-        itemCount.hashCode ^
         about.hashCode ^
         id.hashCode;
   }
