@@ -12,36 +12,50 @@ class ProfilePageViewModel extends BaseViewModel {
   FirebaseStorageService firebaseStorageService;
   AuthenticationService authenticationService;
   FirestoreService firestoreService;
-  ProfilePageViewModel(
-      {@required this.firebaseStorageService,
-      @required this.firestoreService,
-      @required this.authenticationService});
-  File _image;
+  ProfilePageViewModel({
+    @required this.firebaseStorageService,
+    @required this.firestoreService,
+    @required this.authenticationService,
+  });
   User retrivedUser;
+  String imagePath;
   String firstName;
   String lastName;
   String email;
-  User updatedUser;
+
   uploadPic() async {
-    _image = await firebaseStorageService.uploadPic();
-
-    print('done!');
-  }
-
-  Future retriveUser() async {
-    retrivedUser = await firestoreService.retriveUser();
-  }
-
-  Future updateUser(
-      User user, String name, String lastname, String email) async {
-    updatedUser =
-        await firestoreService.updateUser(user, name, lastname, email);
-  }
-
-  setTotalPrice(File image) {
-    _image = image;
+    File imageFile;
+    var image = await ImagePicker().getImage(source: ImageSource.gallery);
+    if (image != null) {
+      imageFile = File(image.path);
+      String result = await firebaseStorageService.uploadPic(imageFile);
+      if (result != null) {
+        imagePath = result;
+        User updatedUSeresheha = retrivedUser.copyWith(
+          image: imagePath,
+        );
+        await firestoreService.updateUser(updatedUSeresheha);
+      }
+    }
     notifyListeners();
   }
 
-  File get image => _image;
+  Future init() async {
+    retrivedUser = await firestoreService.retriveUser();
+    imagePath = retrivedUser.image;
+    firstName = retrivedUser.firstName;
+    lastName = retrivedUser.lastName;
+    email = retrivedUser.email;
+    notifyListeners();
+  }
+
+  Future updateUser() async {
+    User user = User(
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      image: imagePath,
+    );
+    await firestoreService.updateUser(user);
+  }
 }

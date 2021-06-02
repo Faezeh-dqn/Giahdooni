@@ -30,7 +30,9 @@ setUpGetIt() {
   );
 
   getIt.registerSingleton<FirebaseStorageService>(
-    FirebaseStorageService(firebaseStorage: FirebaseStorage.instance),
+    FirebaseStorageService(
+      firebaseStorage: FirebaseStorage.instance,
+    ),
   );
 
   getIt.registerFactory<SignUpViewModel>(

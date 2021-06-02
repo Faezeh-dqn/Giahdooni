@@ -34,22 +34,12 @@ class FirestoreService {
     return user;
   }
 
-  Future updateUser(
-      User user, String name, String lastName, String email) async {
+  Future updateUser(User updatedUser) async {
     String currentUserId = authenticationService.firebaseAuth.currentUser.uid;
-    DocumentSnapshot documentSnapshot =
-        await fireStore.collection(userCollection).doc(currentUserId).get();
-
-    User retriverdUser = User.fromMap(documentSnapshot.data());
-
-    User updatedUser =
-        user.copyWith(firstName: name, lastName: lastName, email: email);
-
     await fireStore
         .collection(userCollection)
         .doc(currentUserId)
         .set(updatedUser.toMap());
-
     return updatedUser;
   }
 
