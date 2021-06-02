@@ -27,8 +27,10 @@ dependencies:
   stacked: ^2.0.4
   get: ^4.1.4
   firebase_core: ^1.0.3
-  firebase_storage: ^8.1.0
+  firebase_storage: ^8.0.3
   image_picker: ^0.7.5+3
+  permission_handler: ^8.0.0+2
+  path: ^1.8.0
   firebase_auth: ^1.1.0
   cloud_firestore: ^1.0.5
   flutter_typeahead: ^1.7.0
@@ -78,6 +80,7 @@ flutter:
     - images/bacterial_leaf_spot.jpg
     - images/root_rot.png
     - images/stem_rot.jpg
+    - images/no_pic.png
     
     
     

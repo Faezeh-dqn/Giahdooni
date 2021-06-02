@@ -53,7 +53,9 @@ setUpGetIt() {
 
   getIt.registerSingleton<ProfilePageViewModel>(
     ProfilePageViewModel(
+      authenticationService: getIt<AuthenticationService>(),
       firestoreService: getIt<FirestoreService>(),
+      firebaseStorageService: getIt<FirebaseStorageService>(),
     ),
   );
 

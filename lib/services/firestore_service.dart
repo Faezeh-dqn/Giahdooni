@@ -4,7 +4,6 @@ import 'package:giahdooni/models/user.dart';
 import 'package:giahdooni/models/plant.dart';
 import 'authentication_service.dart';
 import 'package:giahdooni/models/orders.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 
 class FirestoreService {
   final FirebaseFirestore fireStore;
@@ -23,6 +22,35 @@ class FirestoreService {
         .collection(userCollection)
         .doc(currentUserId)
         .set(user.toMap());
+  }
+
+  Future retriveUser() async {
+    String currentUserId = authenticationService.firebaseAuth.currentUser.uid;
+    DocumentSnapshot documentSnapshot =
+        await fireStore.collection(userCollection).doc(currentUserId).get();
+
+    User user = User.fromMap(documentSnapshot.data());
+    print('user is : $user');
+    return user;
+  }
+
+  Future updateUser(
+      User user, String name, String lastName, String email) async {
+    String currentUserId = authenticationService.firebaseAuth.currentUser.uid;
+    DocumentSnapshot documentSnapshot =
+        await fireStore.collection(userCollection).doc(currentUserId).get();
+
+    User retriverdUser = User.fromMap(documentSnapshot.data());
+
+    User updatedUser =
+        user.copyWith(firstName: name, lastName: lastName, email: email);
+
+    await fireStore
+        .collection(userCollection)
+        .doc(currentUserId)
+        .set(updatedUser.toMap());
+
+    return updatedUser;
   }
 
   Future<Plant> getPlantFromDB(String name) async {
