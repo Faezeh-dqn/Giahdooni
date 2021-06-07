@@ -5,7 +5,9 @@ import 'package:giahdooni/viewmodels/profile_page_viewmodel.dart';
 import 'package:giahdooni/views/home_page.dart';
 import 'package:giahdooni/views/menu_page.dart';
 import 'package:stacked/stacked.dart';
-
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/tap_bounce_container.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import '../service_locator.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -26,18 +28,20 @@ class ProfilePage extends StatelessWidget {
                     children: [
                       ClipOval(
                         child: SizedBox(
-                          width: 200,
-                          height: 200,
-                          child: model.imagePath != null
-                              ? Image.network(model.imagePath)
-                              : Image.asset('images/no_pic.png'),
-                        ),
+                            width: 200,
+                            height: 200,
+                            child: model.imagePath == ''
+                                ? Image.asset('images/no_pic.png')
+                                : Image.network(model.imagePath)),
                       ),
                       TextButton(
                         onPressed: () {
                           model.uploadPic();
                         },
-                        child: Text('Click to choose profile photo'),
+                        child: Text(
+                          'Click to choose profile photo',
+                          style: TextStyle(color: Color(0xff57B71B)),
+                        ),
                       ),
                       SizedBox(
                         height: 10,
@@ -71,7 +75,7 @@ class ProfilePage extends StatelessWidget {
                                 width: 255,
                                 child: TextField(
                                   controller: TextEditingController(
-                                      text: model.retrivedUser.firstName),
+                                      text: model.firstName),
                                   onChanged: (value) {
                                     model.firstName = value;
                                   },
@@ -106,7 +110,7 @@ class ProfilePage extends StatelessWidget {
                                 width: 255,
                                 child: TextField(
                                   controller: TextEditingController(
-                                      text: model.retrivedUser.lastName),
+                                      text: model.lastName),
                                   onChanged: (value) {
                                     model.lastName = value;
                                   },
@@ -132,7 +136,9 @@ class ProfilePage extends StatelessWidget {
                               Text(
                                 'Email : ',
                                 style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.w600),
+                                    color: Colors.grey.shade500,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600),
                               ),
                               SizedBox(
                                 width: 20,
@@ -142,8 +148,12 @@ class ProfilePage extends StatelessWidget {
                                 child: Container(
                                   width: 255,
                                   child: TextField(
+                                    style:
+                                        TextStyle(color: Colors.grey.shade500),
+                                    enabled: false,
+                                    enableInteractiveSelection: false,
                                     controller: TextEditingController(
-                                        text: model.retrivedUser.email),
+                                        text: model.email),
                                     onChanged: (value) {
                                       model.email = value;
                                     },
@@ -192,8 +202,27 @@ class ProfilePage extends StatelessWidget {
                               elevation: 0,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30)),
-                              onPressed: () {
-                                User newUser = model.retrivedUser.copyWith();
+                              onPressed: () async {
+                                if (model.firstName != '' &&
+                                    model.lastName != '' &&
+                                    model.email != '') {
+                                  await model.updateUser();
+                                  // ignore: await_only_futures
+                                  await showTopSnackBar(
+                                    context,
+                                    CustomSnackBar.success(
+                                      message: "Submit was successful!",
+                                    ),
+                                  );
+                                } else {
+                                  showTopSnackBar(
+                                    context,
+                                    CustomSnackBar.error(
+                                      message: "Please fill all items!",
+                                    ),
+                                  );
+                                }
+                                Get.to(MenuPage());
                               },
                               color: Color(0xff8ED362),
                               child: Text(
@@ -206,7 +235,7 @@ class ProfilePage extends StatelessWidget {
                             ),
                           ),
                         ],
-                      )
+                      ),
                     ],
                   ),
           ),

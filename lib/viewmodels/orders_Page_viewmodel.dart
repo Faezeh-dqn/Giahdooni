@@ -6,6 +6,7 @@ import 'package:stacked/stacked.dart';
 class OrdersPageViewModel extends BaseViewModel {
   FirestoreService firestoreService;
   List<Order> orders = [];
+
   OrdersPageViewModel({@required this.firestoreService});
 
   getOrderdPlantFromDB() async {
@@ -19,11 +20,19 @@ class OrdersPageViewModel extends BaseViewModel {
     await firestoreService.addOrderedPlantToDB(order);
   }
 
-  deleteFromCart(Order order) async {
+  Future deleteFromCart(Order order) async {
     await firestoreService.deleteOrderedPlantFromDB(order);
+
+    orders.remove(order);
+    notifyListeners();
   }
 
-  int _counting;
+  Future updateOrder(Order updatedOrder) async {
+    await firestoreService.updateOrder(updatedOrder);
+  }
+
+  int _counting = 0;
+  int _totalPrice;
 
   setCounting(int counting) {
     _counting = counting;
@@ -31,4 +40,11 @@ class OrdersPageViewModel extends BaseViewModel {
   }
 
   int get counting => _counting;
+
+  setTotalPrice(int totalPrice) {
+    _totalPrice = totalPrice;
+    notifyListeners();
+  }
+
+  int get totalPrice => _totalPrice;
 }

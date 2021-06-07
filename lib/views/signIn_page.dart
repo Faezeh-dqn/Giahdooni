@@ -15,93 +15,89 @@ class SignInPage extends StatelessWidget {
         body: Center(
           child: Column(
             children: [
-              Container(
-                height: 140,
-                width: MediaQuery.of(context).size.width,
-                color: Color(0xff4A6934),
-                child: Padding(
-                  padding: EdgeInsets.only(top: 50, left: 20),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          RaisedButton(
-                            elevation: 0,
-                            onPressed: () {
-                              Get.offAll(SignUpPage());
-                            },
-                            color: Color(0xff4A6934),
-                            child: Text(
-                              'Sign up',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w200,
-                                  fontSize: 30),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 90, top: 2),
-                            child: RaisedButton(
-                              elevation: 0,
-                              onPressed: () {
-                                print('ok');
-                              },
-                              color: Color(0xff4A6934),
-                              child: Text(
-                                'Sign in',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 33),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Divider(
-                        thickness: 2,
-                        height: 10,
-                        indent: 230,
-                        endIndent: 35,
-                        color: Colors.white,
-                      )
-                    ],
+              Column(
+                children: [
+                  SizedBox(
+                    height: 45,
                   ),
-                ),
+                  Padding(
+                    padding: EdgeInsets.only(right: 210),
+                    child: Text(
+                      'Sign in',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 50),
+                    ),
+                  ),
+                  Divider(
+                    thickness: 3,
+                    height: 10,
+                    indent: 10,
+                    endIndent: 10,
+                    color: Color(0xff7BEB34),
+                  )
+                ],
               ),
               SizedBox(
-                height: 130,
+                height: 140,
               ),
               Container(
                 width: 380,
                 child: TextField(
                   decoration: InputDecoration(
-                    hintText: 'Email',
-                    border: OutlineInputBorder(
+                    enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
+                      borderSide: new BorderSide(color: Color(0xff8ED362)),
                     ),
+                    hintText: 'Email',
                   ),
                   onChanged: (value) => model.setEmail(value),
                 ),
               ),
               SizedBox(
-                height: 60,
+                height: 30,
               ),
               Container(
                 width: 380,
                 child: TextField(
                   obscureText: true,
                   decoration: InputDecoration(
-                    hintText: 'Password',
-                    border: OutlineInputBorder(
+                    enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
+                      borderSide: new BorderSide(color: Color(0xff8ED362)),
                     ),
+                    hintText: 'Password',
                   ),
                   onChanged: (value) => model.setPassword(value),
                 ),
               ),
+              SizedBox(
+                height: 10,
+              ),
+              TextButton(
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 70,
+                    ),
+                    Text(
+                      'Don’t have an account? ',
+                      style:
+                          TextStyle(fontSize: 16, color: Colors.grey.shade600),
+                    ),
+                    Text(
+                      'Sign Up ',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ],
+                ),
+                onPressed: () {
+                  Get.to(SignUpPage());
+                },
+              ),
               Padding(
-                padding: EdgeInsets.only(top: 110),
+                padding: EdgeInsets.only(top: 145),
                 child: Container(
                   height: 60,
                   width: 200,
@@ -111,7 +107,7 @@ class SignInPage extends StatelessWidget {
                     onPressed: () {
                       model.signIn();
                     },
-                    color: Color(0xff4A6934),
+                    color: Color(0xff8ED362),
                     child: Text(
                       'Sign in',
                       style: TextStyle(

@@ -1,24 +1,25 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 
 class Order {
-  final int plantPrice;
-  final int vaseprice;
+  int plantPrice;
+  int vaseprice;
   final String color;
   final String vaseShape;
   final String name;
   final String plantImage;
   int itemCount;
   int totalprice;
-
   Order({
     @required this.plantPrice,
     @required this.vaseprice,
     @required this.color,
     @required this.vaseShape,
     @required this.name,
+    @required this.plantImage,
     @required this.itemCount,
     @required this.totalprice,
-    @required this.plantImage,
   });
 
   Order copyWith({
@@ -68,6 +69,10 @@ class Order {
       totalprice: map['totalprice'],
     );
   }
+
+  String toJson() => json.encode(toMap());
+
+  factory Order.fromJson(String source) => Order.fromMap(json.decode(source));
 
   @override
   String toString() {

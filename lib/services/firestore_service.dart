@@ -69,8 +69,9 @@ class FirestoreService {
       Order retriveDocument = Order.fromMap(documentSnapshot.data());
       Order updatedDocument = order.copyWith(
           itemCount: retriveDocument.itemCount + order.itemCount,
-          totalprice: (retriveDocument.plantPrice + order.plantPrice) +
-              (retriveDocument.vaseprice + order.vaseprice));
+          totalprice: ((retriveDocument.plantPrice + order.plantPrice) +
+                  (retriveDocument.vaseprice + order.vaseprice)) *
+              order.itemCount);
 
       await fireStore
           .collection(userCollection)
@@ -86,6 +87,19 @@ class FirestoreService {
           .doc(order.name)
           .set(order.toMap());
     }
+  }
+
+  Future updateOrder(Order updatedOrder) async {
+    String currentUserId = authenticationService.firebaseAuth.currentUser.uid;
+
+    await fireStore
+        .collection(userCollection)
+        .doc(currentUserId)
+        .collection(orderCollection)
+        .doc(updatedOrder.name)
+        .set(updatedOrder.toMap());
+
+    return updatedOrder;
   }
 
   Future<List<Plant>> getPlantFromDBToSuggest(int id) async {
@@ -137,7 +151,7 @@ class FirestoreService {
     return orders;
   }
 
-  deleteOrderedPlantFromDB(Order order) async {
+  Future deleteOrderedPlantFromDB(Order order) async {
     String currentUserId = authenticationService.firebaseAuth.currentUser.uid;
     await fireStore
         .collection(userCollection)

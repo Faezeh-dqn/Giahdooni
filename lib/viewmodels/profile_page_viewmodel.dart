@@ -1,6 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+import 'package:get/get.dart';
 import 'package:giahdooni/models/user.dart';
 import 'package:giahdooni/services/authentication_service.dart';
 import 'package:giahdooni/services/firebase_storage_service.dart';
@@ -56,6 +59,13 @@ class ProfilePageViewModel extends BaseViewModel {
       email: email,
       image: imagePath,
     );
-    await firestoreService.updateUser(user);
+
+    if (firstName != null && lastName != null && email != null) {
+      if (firstName != '' && lastName != '' && email != '') {
+        await firestoreService.updateUser(user);
+      }
+    } else {
+      print('we have problem');
+    }
   }
 }
