@@ -124,7 +124,7 @@ class _OrdersPageState extends State<OrdersPage> {
                                         ? IconButton(
                                             iconSize: 25,
                                             onPressed: () async {
-                                              model.deleteFromCart(
+                                              await model.deleteFromCart(
                                                   model.orders[index]);
 
                                               // ignore: await_only_futures
@@ -132,7 +132,7 @@ class _OrdersPageState extends State<OrdersPage> {
                                                 context,
                                                 CustomSnackBar.success(
                                                   message:
-                                                      "Submit was successful!",
+                                                      'Submit was successful!',
                                                 ),
                                               );
                                             },

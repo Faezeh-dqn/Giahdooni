@@ -1,8 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 
 class Order {
+  int id;
   int plantPrice;
   int vaseprice;
   final String color;
@@ -11,7 +10,9 @@ class Order {
   final String plantImage;
   int itemCount;
   int totalprice;
+
   Order({
+    @required this.id,
     @required this.plantPrice,
     @required this.vaseprice,
     @required this.color,
@@ -23,6 +24,7 @@ class Order {
   });
 
   Order copyWith({
+    int id,
     int plantPrice,
     int vaseprice,
     String color,
@@ -33,6 +35,7 @@ class Order {
     int totalprice,
   }) {
     return Order(
+      id: id ?? this.id,
       plantPrice: plantPrice ?? this.plantPrice,
       vaseprice: vaseprice ?? this.vaseprice,
       color: color ?? this.color,
@@ -46,6 +49,7 @@ class Order {
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'plantPrice': plantPrice,
       'vaseprice': vaseprice,
       'color': color,
@@ -59,6 +63,7 @@ class Order {
 
   factory Order.fromMap(Map<String, dynamic> map) {
     return Order(
+      id: map['id'],
       plantPrice: map['plantPrice'],
       vaseprice: map['vaseprice'],
       color: map['color'],
@@ -70,13 +75,9 @@ class Order {
     );
   }
 
-  String toJson() => json.encode(toMap());
-
-  factory Order.fromJson(String source) => Order.fromMap(json.decode(source));
-
   @override
   String toString() {
-    return 'Order(plantPrice: $plantPrice, vaseprice: $vaseprice, color: $color, vaseShape: $vaseShape, name: $name, plantImage: $plantImage, itemCount: $itemCount, totalprice: $totalprice)';
+    return 'Order(id: $id, plantPrice: $plantPrice, vaseprice: $vaseprice, color: $color, vaseShape: $vaseShape, name: $name, plantImage: $plantImage, itemCount: $itemCount, totalprice: $totalprice)';
   }
 
   @override
@@ -84,6 +85,7 @@ class Order {
     if (identical(this, other)) return true;
 
     return other is Order &&
+        other.id == id &&
         other.plantPrice == plantPrice &&
         other.vaseprice == vaseprice &&
         other.color == color &&
@@ -96,7 +98,8 @@ class Order {
 
   @override
   int get hashCode {
-    return plantPrice.hashCode ^
+    return id.hashCode ^
+        plantPrice.hashCode ^
         vaseprice.hashCode ^
         color.hashCode ^
         vaseShape.hashCode ^

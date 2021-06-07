@@ -211,18 +211,18 @@ class ProfilePage extends StatelessWidget {
                                   await showTopSnackBar(
                                     context,
                                     CustomSnackBar.success(
-                                      message: "Submit was successful!",
+                                      message: 'Submit was successful!',
                                     ),
                                   );
                                 } else {
                                   showTopSnackBar(
                                     context,
                                     CustomSnackBar.error(
-                                      message: "Please fill all items!",
+                                      message: 'Please fill all items!',
                                     ),
                                   );
                                 }
-                                Get.to(MenuPage());
+                                await Get.to(MenuPage());
                               },
                               color: Color(0xff8ED362),
                               child: Text(

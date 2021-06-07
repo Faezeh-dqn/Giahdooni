@@ -294,7 +294,9 @@ class BuyingPage extends StatelessWidget {
                           fontSize: 27,
                           fontWeight: FontWeight.w600)),
                   onPressed: () async {
+                    int id = DateTime.now().millisecondsSinceEpoch;
                     Order orderdPlant = Order(
+                        id: id,
                         color: model.selectedColor,
                         plantPrice: plant.plantPrice,
                         vaseShape: model.selectedShape,
@@ -308,7 +310,7 @@ class BuyingPage extends StatelessWidget {
                     await showTopSnackBar(
                       context,
                       CustomSnackBar.success(
-                        message: "Submit was successful!",
+                        message: 'Submit was successful!',
                       ),
                     );
                   },
