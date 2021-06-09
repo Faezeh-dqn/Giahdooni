@@ -1,16 +1,18 @@
+import 'package:flutter/cupertino.dart';
+
 class Plant {
   final String imagePath;
   final String name;
   final int plantPrice;
+  final String about;
+  final String id;
 
-  String about;
-  String id;
   Plant({
-    this.imagePath,
-    this.name,
-    this.plantPrice,
-    this.about,
-    this.id,
+    @required this.imagePath,
+    @required this.name,
+    @required this.plantPrice,
+    @required this.about,
+    @required this.id,
   });
 
   Plant copyWith({

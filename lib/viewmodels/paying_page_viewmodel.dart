@@ -1,8 +1,11 @@
 import 'dart:ui';
+import 'package:flutter/cupertino.dart';
 import 'package:giahdooni/models/payingInfo.dart';
 import 'package:stacked/stacked.dart';
 
 class PayingPageViewModel extends BaseViewModel {
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   bool _isSelected = false;
   String _address = '';
   String _phoneNum = '';
@@ -11,62 +14,28 @@ class PayingPageViewModel extends BaseViewModel {
   String _postCode = '';
   String _city = '';
   String _province = '';
-  Color _color = Color(0xff8ED362);
-  bool _nameController = false;
-  bool _lastNameController = false;
-  bool provinceController = false;
-  bool cityController = false;
-  bool postCodeController = false;
-  bool phoneNumController = false;
-  bool addressController = false;
 
-  checkNullFields() {
-    if (name == '') {
-      _nameController = true;
+  String validateFromField(String value, [String nameOfField]) {
+    if (value.isEmpty) {
+      return '$nameOfField can not be empty';
     } else {
-      print('name is not null');
+      return null;
     }
-    if (lastName == '') {
-      _lastNameController = true;
-    }
-    if (city == '') {
-      cityController = true;
-    }
-    if (province == '') {
-      provinceController = true;
-    }
-    if (address == '') {
-      addressController = true;
-    }
-    if (postCode == '') {
-      postCodeController = true;
-    }
-    if (phoneNum == '') {
-      phoneNumController = true;
-    }
-    notifyListeners();
   }
 
-  setColor(Color color) {
-    _color = color;
-    notifyListeners();
+  bool isFormFieldValid(String field) {
+    if (validateFromField(field) == null) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
-  Color get color => _color;
-
-  setNameController(bool nameController) {
-    _nameController = nameController;
+  submitForm() {
+    formKey.currentState.validate();
+    if (isFormFieldValid(_address) && isFormFieldValid(_phoneNum)) {}
     notifyListeners();
   }
-
-  bool get nameController => _nameController;
-
-  setLastNameController(bool lastNameController) {
-    _lastNameController = lastNameController;
-    notifyListeners();
-  }
-
-  bool get lastNameController => _lastNameController;
 
   setCity(String city) {
     _city = city;
@@ -126,12 +95,13 @@ class PayingPageViewModel extends BaseViewModel {
 
   checkTextFields() {
     PayingInfo payingInfo = PayingInfo(
-        address: address,
-        postCode: postCode,
-        phoneNumber: phoneNum,
-        city: city,
-        province: province,
-        name: name,
-        lastName: lastName);
+      address: address,
+      postCode: postCode,
+      phoneNumber: phoneNum,
+      city: city,
+      province: province,
+      name: name,
+      lastName: lastName,
+    );
   }
 }

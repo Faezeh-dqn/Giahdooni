@@ -16,283 +16,279 @@ class PayingPage extends StatelessWidget {
       builder: (context, model, child) => Scaffold(
         body: Container(
           child: SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 80,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(right: 40),
-                  child: Text(
-                    'Complete your information :',
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
+            child: Form(
+              key: model.formKey,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 80,
                   ),
-                ),
-                SizedBox(
-                  height: 80,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(
-                      Icons.star,
-                      size: 15,
-                      color: Colors.red,
+                  Padding(
+                    padding: EdgeInsets.only(right: 40),
+                    child: Text(
+                      'Complete your information :',
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
                     ),
-                    Container(
-                      width: 160,
-                      child: TextField(
-                        decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: new BorderSide(
-                                  width: 2.5,
-                                  color: (model.nameController == false)
-                                      ? Color(0xff8ED362)
-                                      : Colors.red),
-                            ),
-                            hintText: 'name',
-                            hintStyle: TextStyle(fontWeight: FontWeight.w500)),
-                        onChanged: (value) {
-                          if (value != '') {
-                            model.setNameController(false);
-                          }
-                          model.setName(value);
-                          print('value is : $value');
-                        },
+                  ),
+                  SizedBox(
+                    height: 80,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Icon(
+                        Icons.star,
+                        size: 15,
+                        color: Colors.red,
                       ),
-                    ),
-                    Icon(
-                      Icons.star,
-                      size: 15,
-                      color: Colors.red,
-                    ),
-                    Container(
-                      width: 160,
-                      child: TextField(
-                        decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: new BorderSide(
-                                  width: 2.5,
-                                  color: (model.lastNameController == false)
-                                      ? Color(0xff8ED362)
-                                      : Colors.red),
-                            ),
-                            hintText: 'last name',
-                            hintStyle: TextStyle(fontWeight: FontWeight.w500)),
-                        onChanged: (value) {
-                          if (value != '') {
-                            model.setLastNameController(false);
-                          }
-                          model.setlastName(value);
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(
-                      Icons.star,
-                      size: 15,
-                      color: Colors.red,
-                    ),
-                    Container(
-                      width: 160,
-                      child: TextField(
-                        decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: new BorderSide(
-                                  width: 2.5,
-                                  color: (model.provinceController == false)
-                                      ? Color(0xff8ED362)
-                                      : Colors.red),
-                            ),
-                            hintText: 'province',
-                            hintStyle: TextStyle(fontWeight: FontWeight.w500)),
-                        onChanged: (value) {
-                          model.setProvince(value);
-                          print(model.province);
-                        },
-                      ),
-                    ),
-                    Icon(
-                      Icons.star,
-                      size: 15,
-                      color: Colors.red,
-                    ),
-                    Container(
-                      width: 160,
-                      child: TextField(
-                        decoration: InputDecoration(
+                      Container(
+                        width: 160,
+                        child: TextFormField(
+                          decoration: InputDecoration(
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: new BorderSide(
                                 width: 2.5,
-                                color: (model.cityController == false)
-                                    ? Color(0xff8ED362)
-                                    : Colors.red,
+                                color: Color(0xff8ED362),
                               ),
                             ),
-                            hintText: 'city',
-                            hintStyle: TextStyle(fontWeight: FontWeight.w500)),
-                        onChanged: (value) {
-                          model.setCity(value);
-                          print(model.city);
-                        },
+                            hintText: 'name',
+                            hintStyle: TextStyle(fontWeight: FontWeight.w500),
+                          ),
+                          validator: (value) {
+                            return model.validateFromField(value, 'name');
+                          },
+                          onChanged: (value) {
+                            model.formKey.currentState.validate();
+                            model.setName(value);
+                          },
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(
-                      Icons.star,
-                      size: 15,
-                      color: Colors.red,
-                    ),
-                    Container(
-                      width: 160,
-                      child: TextField(
-                        decoration: InputDecoration(
+                      Icon(
+                        Icons.star,
+                        size: 15,
+                        color: Colors.red,
+                      ),
+                      Container(
+                        width: 160,
+                        child: TextFormField(
+                          decoration: InputDecoration(
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: new BorderSide(
-                                  width: 2.5,
-                                  color: (model.postCodeController == false)
-                                      ? Color(0xff8ED362)
-                                      : Colors.red),
+                                  width: 2.5, color: Color(0xff8ED362)),
                             ),
-                            hintText: 'post code',
-                            hintStyle: TextStyle(fontWeight: FontWeight.w500)),
-                        onChanged: (value) {
-                          model.setPostCode(value);
-                        },
+                            hintText: 'last name',
+                            hintStyle: TextStyle(fontWeight: FontWeight.w500),
+                          ),
+                          validator: (value) {
+                            return model.validateFromField(value, 'last name');
+                          },
+                          onChanged: (value) {
+                            model.setlastName(value);
+                          },
+                        ),
                       ),
-                    ),
-                    Icon(
-                      Icons.star,
-                      size: 15,
-                      color: Colors.red,
-                    ),
-                    Container(
-                      width: 160,
-                      child: TextField(
-                        decoration: InputDecoration(
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Icon(
+                        Icons.star,
+                        size: 15,
+                        color: Colors.red,
+                      ),
+                      Container(
+                        width: 160,
+                        child: TextFormField(
+                          decoration: InputDecoration(
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: new BorderSide(
-                                  width: 2.5,
-                                  color: (model.phoneNumController == false)
-                                      ? Color(0xff8ED362)
-                                      : Colors.red),
+                                  width: 2.5, color: Color(0xff8ED362)),
                             ),
-                            hintText: 'phone number',
-                            hintStyle: TextStyle(fontWeight: FontWeight.w500)),
-                        onChanged: (value) {
-                          model.setPhoneNum(value);
-                        },
+                            hintText: 'province',
+                            hintStyle: TextStyle(fontWeight: FontWeight.w500),
+                          ),
+                          validator: (value) {
+                            return model.validateFromField(value, 'province');
+                          },
+                          onChanged: (value) {
+                            model.setProvince(value);
+                            print(model.province);
+                          },
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(
-                      Icons.star,
-                      size: 15,
-                      color: Colors.red,
-                    ),
-                    Container(
-                      width: 360,
-                      child: TextField(
-                        decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: new BorderSide(
+                      Icon(
+                        Icons.star,
+                        size: 15,
+                        color: Colors.red,
+                      ),
+                      Container(
+                        width: 160,
+                        child: TextField(
+                          decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: new BorderSide(
                                   width: 2.5,
-                                  color: (model.addressController == false)
-                                      ? Color(0xff8ED362)
-                                      : Colors.red),
-                            ),
-                            hintText: 'address',
-                            hintStyle: TextStyle(fontWeight: FontWeight.w500)),
-                        onChanged: (value) {
-                          model.setAddress(value);
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Checkbox(
-                        value: model.isSelected,
-                        onChanged: (value) {
-                          model.setIsSelected(value);
-                        }),
-                    Text(
-                      'I accept the rules',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 40,
-                ),
-                Container(
-                  height: 60,
-                  width: 200,
-                  child: RaisedButton(
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    onPressed: () async {
-                      await model.checkNullFields();
-                      await (model.isSelected)
-                          ? print('okay')
-                          : showTopSnackBar(
-                              context,
-                              CustomSnackBar.info(
-                                message: 'Please accept the rules!',
+                                  color: Color(0xff8ED362),
+                                ),
                               ),
-                            );
-                    },
-                    color: (model.isSelected)
-                        ? Color(0xff8ED362)
-                        : Colors.grey.shade500,
-                    child: Text(
-                      'Continue',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30,
-                          fontWeight: FontWeight.w400),
+                              hintText: 'city',
+                              hintStyle:
+                                  TextStyle(fontWeight: FontWeight.w500)),
+                          onChanged: (value) {
+                            model.setCity(value);
+                            print(model.city);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Icon(
+                        Icons.star,
+                        size: 15,
+                        color: Colors.red,
+                      ),
+                      Container(
+                        width: 160,
+                        child: TextField(
+                          decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: new BorderSide(
+                                    width: 2.5, color: Color(0xff8ED362)),
+                              ),
+                              hintText: 'post code',
+                              hintStyle:
+                                  TextStyle(fontWeight: FontWeight.w500)),
+                          onChanged: (value) {
+                            model.setPostCode(value);
+                          },
+                        ),
+                      ),
+                      Icon(
+                        Icons.star,
+                        size: 15,
+                        color: Colors.red,
+                      ),
+                      Container(
+                        width: 160,
+                        child: TextField(
+                          decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: new BorderSide(
+                                    width: 2.5, color: Color(0xff8ED362)),
+                              ),
+                              hintText: 'phone number',
+                              hintStyle:
+                                  TextStyle(fontWeight: FontWeight.w500)),
+                          onChanged: (value) {
+                            model.setPhoneNum(value);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Icon(
+                        Icons.star,
+                        size: 15,
+                        color: Colors.red,
+                      ),
+                      Container(
+                        width: 360,
+                        child: TextField(
+                          decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: new BorderSide(
+                                    width: 2.5, color: Color(0xff8ED362)),
+                              ),
+                              hintText: 'address',
+                              hintStyle:
+                                  TextStyle(fontWeight: FontWeight.w500)),
+                          onChanged: (value) {
+                            model.setAddress(value);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Checkbox(
+                          value: model.isSelected,
+                          onChanged: (value) {
+                            model.setIsSelected(value);
+                          }),
+                      Text(
+                        'I accept the rules',
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.w600),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  Container(
+                    height: 60,
+                    width: 200,
+                    child: RaisedButton(
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      onPressed: () async {
+                        await model.submitForm();
+                        (model.isSelected)
+                            ? print('okay')
+                            : showTopSnackBar(
+                                context,
+                                CustomSnackBar.info(
+                                  message: 'Please accept the rules!',
+                                ),
+                              );
+                      },
+                      color: (model.isSelected)
+                          ? Color(0xff8ED362)
+                          : Colors.grey.shade500,
+                      child: Text(
+                        'Continue',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 30,
+                            fontWeight: FontWeight.w400),
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
