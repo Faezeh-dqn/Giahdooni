@@ -5,6 +5,7 @@ import 'package:giahdooni/service_locator.dart';
 import 'package:flutter/services.dart';
 import 'package:giahdooni/views/home_page.dart';
 import 'package:giahdooni/views/menu_page.dart';
+import 'package:giahdooni/views/pay_page.dart';
 import 'package:giahdooni/views/profile_page.dart';
 import 'package:giahdooni/views/signup_page.dart';
 

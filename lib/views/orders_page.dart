@@ -4,6 +4,8 @@ import 'package:giahdooni/models/orders.dart';
 import 'package:giahdooni/viewmodels/orders_Page_viewmodel.dart';
 import 'package:giahdooni/views/home_page.dart';
 import 'package:giahdooni/views/menu_page.dart';
+import 'package:giahdooni/views/pay_page.dart';
+import 'package:giahdooni/views/searchBar_page.dart';
 import 'package:stacked/stacked.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
@@ -62,6 +64,9 @@ class _OrdersPageState extends State<OrdersPage> {
                                     width: 230,
                                     child: Column(
                                       children: [
+                                        SizedBox(
+                                          height: 10,
+                                        ),
                                         Text(
                                           '${model.orders[index].name}',
                                           style: TextStyle(
@@ -101,6 +106,7 @@ class _OrdersPageState extends State<OrdersPage> {
                                         Text(
                                           'Total price : ${model.orders[index].totalprice} T',
                                           style: TextStyle(
+                                              color: Colors.red.shade600,
                                               fontSize: 19,
                                               fontWeight: FontWeight.w600),
                                         ),
@@ -144,27 +150,25 @@ class _OrdersPageState extends State<OrdersPage> {
                                         : IconButton(
                                             iconSize: 25,
                                             onPressed: () {
-                                              if (model
-                                                      .orders[index].itemCount >
-                                                  1) {
-                                                model.setCounting(model
-                                                    .orders[index].itemCount--);
-                                              }
+                                              setState(
+                                                () {
+                                                  if (model.orders[index]
+                                                          .itemCount >
+                                                      1) {
+                                                    model.orders[index]
+                                                        .itemCount--;
+                                                  }
 
-                                              model.setTotalPrice((model
-                                                          .orders[index]
-                                                          .plantPrice +
+                                                  model.orders[index]
+                                                      .totalprice = (model
+                                                              .orders[index]
+                                                              .plantPrice +
+                                                          model.orders[index]
+                                                              .vaseprice) *
                                                       model.orders[index]
-                                                          .vaseprice) *
-                                                  model
-                                                      .orders[index].itemCount);
-                                              print(
-                                                  'totalPrice is : ${model.totalPrice}');
-
-                                              print(
-                                                  'counting is : ${model.counting}');
-                                              print(
-                                                  'itemcount is : ${model.orders[index].itemCount}');
+                                                          .itemCount;
+                                                },
+                                              );
                                             },
                                             icon: Icon(
                                               Icons.remove,
@@ -192,21 +196,19 @@ class _OrdersPageState extends State<OrdersPage> {
                                         shape: BoxShape.circle),
                                     child: IconButton(
                                       onPressed: () {
-                                        model.setCounting(
-                                            model.orders[index].itemCount++);
+                                        setState(
+                                          () {
+                                            model.orders[index].itemCount++;
 
-                                        model.setTotalPrice((model
-                                                    .orders[index].plantPrice +
-                                                model.orders[index].vaseprice) *
-                                            model.orders[index].itemCount);
-
-                                        print(
-                                            'totalPrice is : ${model.totalPrice}');
-
-                                        print(
-                                            'counting is : ${model.counting}');
-                                        print(
-                                            'itemcount is : ${model.orders[index].itemCount}');
+                                            model.orders[index]
+                                                .totalprice = (model
+                                                        .orders[index]
+                                                        .plantPrice +
+                                                    model.orders[index]
+                                                        .vaseprice) *
+                                                model.orders[index].itemCount;
+                                          },
+                                        );
                                       },
                                       icon: Icon(
                                         Icons.add,
@@ -215,6 +217,16 @@ class _OrdersPageState extends State<OrdersPage> {
                                     ),
                                   ),
                                 ],
+                              ),
+                              SizedBox(
+                                height: 6,
+                              ),
+                              Divider(
+                                thickness: 2,
+                                height: 10,
+                                indent: 10,
+                                endIndent: 10,
+                                color: Color(0xff7BEB34),
                               ),
                             ],
                           );
@@ -230,7 +242,11 @@ class _OrdersPageState extends State<OrdersPage> {
                           elevation: 0,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30)),
-                          onPressed: () {},
+                          onPressed: () async {
+                            model.updateOrders(model.orders);
+
+                            await Get.to(PayingPage());
+                          },
                           color: Color(0xff8ED362),
                           child: Text(
                             'Continue',

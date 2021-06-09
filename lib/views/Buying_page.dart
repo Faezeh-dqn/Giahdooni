@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 import 'package:giahdooni/models/orders.dart';
 import 'package:giahdooni/models/plant.dart';
 import 'package:giahdooni/views/choosing_page.dart';
 import 'package:giahdooni/viewmodels/buying_page_viewmodel.dart';
+import 'package:giahdooni/views/home_page.dart';
+import 'package:giahdooni/views/menu_page.dart';
 import 'package:stacked/stacked.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
@@ -294,7 +297,8 @@ class BuyingPage extends StatelessWidget {
                           fontSize: 27,
                           fontWeight: FontWeight.w600)),
                   onPressed: () async {
-                    int id = DateTime.now().millisecondsSinceEpoch;
+                    String id =
+                        DateTime.now().millisecondsSinceEpoch.toString();
                     Order orderdPlant = Order(
                         id: id,
                         color: model.selectedColor,
@@ -306,6 +310,7 @@ class BuyingPage extends StatelessWidget {
                         totalprice: model.totalPrice,
                         vaseprice: model.vasePriceForShow);
                     await model.addOrderedPlantToDB(orderdPlant);
+
                     // ignore: await_only_futures
                     await showTopSnackBar(
                       context,
@@ -313,6 +318,7 @@ class BuyingPage extends StatelessWidget {
                         message: 'Submit was successful!',
                       ),
                     );
+                    await Get.to(MenuPage());
                   },
                 ),
               ),

@@ -84,7 +84,7 @@ class FirestoreService {
           .collection(userCollection)
           .doc(currentUserId)
           .collection(orderCollection)
-          .doc(order.name)
+          .doc(order.id.toString())
           .set(order.toMap());
     }
   }
@@ -96,7 +96,7 @@ class FirestoreService {
         .collection(userCollection)
         .doc(currentUserId)
         .collection(orderCollection)
-        .doc(updatedOrder.name)
+        .doc(updatedOrder.id)
         .set(updatedOrder.toMap());
 
     return updatedOrder;

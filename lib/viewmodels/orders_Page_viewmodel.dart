@@ -47,4 +47,14 @@ class OrdersPageViewModel extends BaseViewModel {
   }
 
   int get totalPrice => _totalPrice;
+
+  updateOrders(List<Order> order) async {
+    int i;
+    order.forEach((element) async {
+      Order updatedOrder = element;
+
+      await updateOrder(updatedOrder);
+    });
+    print('done!');
+  }
 }
