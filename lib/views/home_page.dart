@@ -23,67 +23,70 @@ class _HomePageState extends State<HomePage> {
       disposeViewModel: false,
       viewModelBuilder: () => getIt<HomePageViewModel>(),
       onModelReady: (model) => model.getPlantFromDBToSuggest(1),
-      builder: (context, model, child) => Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          actions: [
-            Padding(
-              padding: EdgeInsets.only(top: 5),
-              child: Container(
-                width: 392,
-                height: 50,
-                child: RaisedButton(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30)),
-                  onPressed: () {
-                    Get.to(SearchBarPage());
-                  },
-                  color: Colors.grey.shade300,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Search your plant',
-                        style: TextStyle(letterSpacing: 0.9, fontSize: 16),
+      builder: (context, model, child) => (model.isBusy)
+          ? Center(child: CircularProgressIndicator())
+          : Scaffold(
+              appBar: AppBar(
+                backgroundColor: Colors.white,
+                elevation: 0,
+                actions: [
+                  Padding(
+                    padding: EdgeInsets.only(top: 5),
+                    child: Container(
+                      width: 392,
+                      height: 50,
+                      child: RaisedButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30)),
+                        onPressed: () {
+                          Get.to(SearchBarPage());
+                        },
+                        color: Colors.grey.shade300,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Search your plant',
+                              style:
+                                  TextStyle(letterSpacing: 0.9, fontSize: 16),
+                            ),
+                            Icon(Icons.search),
+                          ],
+                        ),
                       ),
-                      Icon(Icons.search),
-                    ],
+                    ),
                   ),
+                ],
+              ),
+              body: Center(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(right: 207),
+                      child: Text(
+                        'Suggestions:',
+                        style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        itemCount: model.plantsToSuggest.length,
+                        itemBuilder: (context, index) {
+                          return PlantCard(plant: model.plantsToSuggest[index]);
+                        },
+                      ),
+                    )
+                  ],
                 ),
               ),
             ),
-          ],
-        ),
-        body: Center(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding: EdgeInsets.only(right: 207),
-                child: Text(
-                  'Suggestions:',
-                  style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black),
-                ),
-              ),
-              Expanded(
-                child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: model.plantsToSuggest.length,
-                  itemBuilder: (context, index) {
-                    return PlantCard(plant: model.plantsToSuggest[index]);
-                  },
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
     );
   }
 }
@@ -106,8 +109,11 @@ class PlantCard extends StatelessWidget {
               ),
             );
           },
-          iconSize: 170,
-          icon: Image.asset('${plant.imagePath}'),
+          iconSize: 160,
+          icon: CircleAvatar(
+            backgroundImage: AssetImage('${plant.imagePath}'),
+            radius: 150,
+          ),
         ),
         SizedBox(
           width: 10,

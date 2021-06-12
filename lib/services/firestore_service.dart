@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:giahdooni/models/diseases.dart';
+import 'package:giahdooni/models/payingInfo.dart';
 import 'package:giahdooni/models/user.dart';
 import 'package:giahdooni/models/plant.dart';
 import 'authentication_service.dart';
@@ -13,6 +14,7 @@ class FirestoreService {
   String plantCollection = 'palnts';
   String orderCollection = 'order';
   String diseasesCollection = 'diseases';
+  String payingInfoCollection = 'paying info';
 
   FirestoreService({this.fireStore, this.authenticationService});
 
@@ -159,5 +161,16 @@ class FirestoreService {
         .collection(orderCollection)
         .doc(order.name)
         .delete();
+  }
+
+  Future addPayingInfoToDB(PayingInfo payingInfo) async {
+    String currentUserId = authenticationService.firebaseAuth.currentUser.uid;
+
+    await fireStore
+        .collection(userCollection)
+        .doc(currentUserId)
+        .collection(payingInfoCollection)
+        .doc(payingInfo.postCode)
+        .set(payingInfo.toMap());
   }
 }

@@ -1,11 +1,13 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:giahdooni/models/payingInfo.dart';
+import 'package:giahdooni/services/firestore_service.dart';
 import 'package:stacked/stacked.dart';
 
 class PayingPageViewModel extends BaseViewModel {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
+  FirestoreService firestoreService;
+  PayingPageViewModel({@required this.firestoreService});
   bool _isSelected = false;
   String _address = '';
   String _phoneNum = '';
@@ -31,9 +33,18 @@ class PayingPageViewModel extends BaseViewModel {
     }
   }
 
-  submitForm() {
+  Future submitForm() async {
     formKey.currentState.validate();
-    if (isFormFieldValid(_address) && isFormFieldValid(_phoneNum)) {}
+    if (isFormFieldValid(_address) &&
+        isFormFieldValid(_phoneNum) &&
+        isFormFieldValid(_name) &&
+        isFormFieldValid(_lastName) &&
+        isFormFieldValid(_province) &&
+        isFormFieldValid(_city) &&
+        isFormFieldValid(_postCode)) {
+      await addPayingInfoToDB2();
+      print('nice job everything is okay');
+    }
     notifyListeners();
   }
 
@@ -93,8 +104,8 @@ class PayingPageViewModel extends BaseViewModel {
 
   String get phoneNum => _phoneNum;
 
-  checkTextFields() {
-    PayingInfo payingInfo = PayingInfo(
+  Future addPayingInfoToDB2() async {
+    PayingInfo payingInfo = await PayingInfo(
       address: address,
       postCode: postCode,
       phoneNumber: phoneNum,
@@ -103,5 +114,6 @@ class PayingPageViewModel extends BaseViewModel {
       name: name,
       lastName: lastName,
     );
+    await firestoreService.addPayingInfoToDB(payingInfo);
   }
 }

@@ -80,7 +80,8 @@ setUpGetIt() {
     ),
   );
 
-  getIt.registerFactory<PayingPageViewModel>(() => PayingPageViewModel());
+  getIt.registerFactory<PayingPageViewModel>(
+      () => PayingPageViewModel(firestoreService: getIt<FirestoreService>()));
 
   getIt.registerFactory<SignInViewModel>(
     () =>
