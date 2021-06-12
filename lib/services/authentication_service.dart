@@ -39,7 +39,6 @@ class AuthenticationService {
       } else if (e.code == 'wrong-password') {
         throw AuthException('Invalid email and password combination');
       } else {
-        print(e);
         throw AuthException('Check your connection and try again');
       }
     }

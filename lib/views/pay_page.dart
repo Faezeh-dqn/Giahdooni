@@ -69,7 +69,7 @@ class PayingPage extends StatelessWidget {
                             return model.validateFromField(value, 'name');
                           },
                           onFieldSubmitted: (value) {
-                            model.formKey.currentState.validate();
+                            model.validateForm();
                             model.setName(value);
                           },
                         ),
@@ -95,7 +95,7 @@ class PayingPage extends StatelessWidget {
                             return model.validateFromField(value, 'last name');
                           },
                           onChanged: (value) {
-                            model.formKey.currentState.validate();
+                            model.validateForm();
                             model.setlastName(value);
                           },
                         ),
@@ -129,7 +129,7 @@ class PayingPage extends StatelessWidget {
                             return model.validateFromField(value, 'province');
                           },
                           onChanged: (value) {
-                            model.formKey.currentState.validate();
+                            model.validateForm();
                             model.setProvince(value);
                           },
                         ),
@@ -157,7 +157,7 @@ class PayingPage extends StatelessWidget {
                             return model.validateFromField(value, 'city');
                           },
                           onChanged: (value) {
-                            model.formKey.currentState.validate();
+                            model.validateForm();
                             model.setCity(value);
                           },
                         ),
@@ -193,7 +193,7 @@ class PayingPage extends StatelessWidget {
                             return model.validateFromField(value, 'post code');
                           },
                           onChanged: (value) {
-                            model.formKey.currentState.validate();
+                            model.validateForm();
                             model.setPostCode(value);
                           },
                         ),
@@ -222,7 +222,7 @@ class PayingPage extends StatelessWidget {
                                 value, 'phone number');
                           },
                           onChanged: (value) {
-                            model.formKey.currentState.validate();
+                            model.validateForm();
                             model.setPhoneNum(value);
                           },
                         ),
@@ -258,7 +258,7 @@ class PayingPage extends StatelessWidget {
                             return model.validateFromField(value, 'province');
                           },
                           onChanged: (value) {
-                            model.formKey.currentState.validate();
+                            model.validateForm();
                             model.setAddress(value);
                           },
                         ),
