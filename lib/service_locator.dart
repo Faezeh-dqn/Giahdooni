@@ -11,10 +11,12 @@ import 'package:giahdooni/viewmodels/diseases_page_viewmodel.dart';
 import 'package:giahdooni/viewmodels/home_page_viewmodel.dart';
 import 'package:giahdooni/viewmodels/orders_Page_viewmodel.dart';
 import 'package:giahdooni/viewmodels/paying_page_viewmodel.dart';
+import 'package:giahdooni/viewmodels/paymentGateway_page_viewmodel.dart';
 import 'package:giahdooni/viewmodels/profile_page_viewmodel.dart';
 import 'package:giahdooni/viewmodels/search_bar_view_model.dart';
 import 'package:giahdooni/viewmodels/sign_in_viewmodel.dart';
 import 'package:giahdooni/viewmodels/sign_up_viewmodel.dart';
+import 'package:giahdooni/viewmodels/successful_page_viewmodel.dart';
 
 GetIt getIt = GetIt.instance;
 
@@ -42,6 +44,9 @@ setUpGetIt() {
       firestoreService: getIt<FirestoreService>(),
     ),
   );
+
+  getIt.registerFactory<PaymentGViewModel>(() => PaymentGViewModel());
+
   getIt.registerFactory<BuyingPageViewModel>(
     () => BuyingPageViewModel(
       firestoreService: getIt<FirestoreService>(),
@@ -73,6 +78,9 @@ setUpGetIt() {
       firestoreService: getIt<FirestoreService>(),
     ),
   );
+
+  getIt.registerSingleton<successfulPaymentViewModel>(
+      successfulPaymentViewModel());
 
   getIt.registerFactory<SearchBarPageViewModel>(
     () => SearchBarPageViewModel(

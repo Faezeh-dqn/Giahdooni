@@ -16,6 +16,7 @@ class PayingPageViewModel extends BaseViewModel {
   String _postCode = '';
   String _city = '';
   String _province = '';
+  bool _validmoving = false;
 
   validateForm() {
     if (shouldShowErrorMessages) {
@@ -49,11 +50,21 @@ class PayingPageViewModel extends BaseViewModel {
         isFormFieldValid(_province) &&
         isFormFieldValid(_city) &&
         isFormFieldValid(_postCode)) {
+      _validmoving = true;
       await addPayingInfoToDB2();
       print('nice job everything is okay');
+    } else {
+      print('fill all the fields');
     }
     notifyListeners();
   }
+
+  setvalidmoving(bool validmoving) {
+    _validmoving = validmoving;
+    notifyListeners();
+  }
+
+  bool get validmoving => _validmoving;
 
   setCity(String city) {
     _city = city;

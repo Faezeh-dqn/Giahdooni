@@ -315,7 +315,7 @@ class BuyingPage extends StatelessWidget {
                     await showTopSnackBar(
                       context,
                       CustomSnackBar.success(
-                        message: 'Submit was successful!',
+                        message: 'Your purchase was successful!',
                       ),
                     );
                     await Get.to(MenuPage());

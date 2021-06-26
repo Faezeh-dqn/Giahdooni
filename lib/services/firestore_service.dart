@@ -159,7 +159,7 @@ class FirestoreService {
         .collection(userCollection)
         .doc(currentUserId)
         .collection(orderCollection)
-        .doc(order.name)
+        .doc(order.id)
         .delete();
   }
 

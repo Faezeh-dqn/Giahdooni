@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:giahdooni/viewmodels/paying_page_viewmodel.dart';
 import 'package:giahdooni/views/menu_page.dart';
 import 'package:giahdooni/views/orders_page.dart';
+import 'package:giahdooni/views/paymentLoading.dart';
 import 'package:stacked/stacked.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
@@ -28,7 +29,7 @@ class PayingPage extends StatelessWidget {
                       iconSize: 32,
                       icon: Icon(Icons.arrow_back),
                       onPressed: () {
-                        Navigator.of(context).pop();
+                        Get.to(() => MenuPage());
                       },
                     ),
                   ),
@@ -297,15 +298,21 @@ class PayingPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(30),
                       ),
                       onPressed: () async {
-                        (model.isSelected)
-                            ? print('okay')
-                            : showTopSnackBar(
-                                context,
-                                CustomSnackBar.info(
-                                  message: 'Please accept the rules!',
-                                ),
-                              );
+                        if (model.isSelected == false) {
+                          showTopSnackBar(
+                            context,
+                            CustomSnackBar.info(
+                              message: 'Please accept the rules!',
+                            ),
+                          );
+                        } else {
+                          print('rules accepted');
+                        }
+
                         await model.submitForm();
+                        if (model.validmoving) {
+                          await Get.to(() => PaymentLoadingPage());
+                        }
                       },
                       color: (model.isSelected)
                           ? Color(0xff8ED362)

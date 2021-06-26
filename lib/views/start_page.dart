@@ -1,14 +1,14 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:giahdooni/views/signup_page.dart';
 
 class StartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Timer(Duration(seconds: 4), () {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => SignUpPage()));
-    });
+    // Timer(Duration(seconds: 4), () {
+    // Get.toEnd(() => SignUpPage());
+    //  });
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -46,7 +46,22 @@ class StartPage extends StatelessWidget {
                   fontSize: 62,
                   color: Color(0xff5D8841),
                   fontWeight: FontWeight.w700),
-            )
+            ),
+            SizedBox(
+              height: 80,
+            ),
+            RaisedButton(
+              onPressed: () {
+                Get.to(SignUpPage());
+              },
+              child: Text(
+                'Start',
+                style: TextStyle(
+                    fontSize: 27,
+                    color: Colors.black54,
+                    fontWeight: FontWeight.w900),
+              ),
+            ),
           ],
         ),
       ),

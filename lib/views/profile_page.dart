@@ -178,26 +178,8 @@ class ProfilePage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Container(
-                            height: 50,
-                            width: 150,
-                            child: RaisedButton(
-                              elevation: 0,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30)),
-                              onPressed: () {},
-                              color: Color(0xff8ED362),
-                              child: Text(
-                                'Cancel',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            height: 50,
-                            width: 150,
+                            height: 55,
+                            width: 250,
                             child: RaisedButton(
                               elevation: 0,
                               shape: RoundedRectangleBorder(
