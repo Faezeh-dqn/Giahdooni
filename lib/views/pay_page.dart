@@ -298,20 +298,17 @@ class PayingPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(30),
                       ),
                       onPressed: () async {
-                        if (model.isSelected == false) {
+                        await model.submitForm();
+                        if (model.validmoving && model.isSelected) {
+                          await model.addPayingInfoToDB2();
+                          await Get.to(() => PaymentLoadingPage());
+                        } else if (model.isSelected == false) {
                           showTopSnackBar(
                             context,
-                            CustomSnackBar.info(
+                            CustomSnackBar.error(
                               message: 'Please accept the rules!',
                             ),
                           );
-                        } else {
-                          print('rules accepted');
-                        }
-
-                        await model.submitForm();
-                        if (model.validmoving) {
-                          await Get.to(() => PaymentLoadingPage());
                         }
                       },
                       color: (model.isSelected)

@@ -4,7 +4,7 @@ import 'package:giahdooni/views/orders_page.dart';
 import 'package:giahdooni/views/profile_page.dart';
 import 'package:giahdooni/views/searchBar_page.dart';
 
-import '../service_locator.dart';
+
 
 class MenuPage extends StatefulWidget {
   @override

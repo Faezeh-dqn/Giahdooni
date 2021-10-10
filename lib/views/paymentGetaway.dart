@@ -84,6 +84,7 @@ class PaymentGatewayPage extends StatelessWidget {
                 Container(
                   width: 360,
                   child: TextFormField(
+                    obscureText: true,
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),

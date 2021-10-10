@@ -19,7 +19,7 @@ class FirestoreService {
   FirestoreService({this.fireStore, this.authenticationService});
 
   Future createUser(User user) async {
-    String currentUserId = authenticationService.firebaseAuth.currentUser.uid;
+    String currentUserId = await authenticationService.firebaseAuth.currentUser.uid;
     await fireStore
         .collection(userCollection)
         .doc(currentUserId)

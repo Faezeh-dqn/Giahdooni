@@ -37,6 +37,7 @@ class ProfilePage extends StatelessWidget {
                       TextButton(
                         onPressed: () {
                           model.uploadPic();
+                          
                         },
                         child: Text(
                           'Click to choose profile photo',
